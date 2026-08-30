@@ -1,848 +1,249 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halloween | Nexus Community</title>
-    <style>
-        :root {
-            --bg-deep: #0a0612;
-            --bg-card: #130d22;
-            --primary-purple: #7b2cbf;
-            --accent-purple: #9d4edd;
-            --primary-orange: #ff7b00;
-            --accent-orange: #ff9e00;
-            --text-light: #f3f4f6;
-            --text-muted: #9ca3af;
-            --danger: #ef4444;
-            --success: #10b981;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halloween na Nexus Community</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-light);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Fundo Animado */
-        .night-sky {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 50% 20%, #1f1035 0%, #0a0612 70%);
-        }
-
-        .moon {
-            position: absolute;
-            top: 50px;
-            right: 80px;
-            width: 100px;
-            height: 100px;
-            background: #fdfcdc;
-            border-radius: 50%;
-            box-shadow: 0 0 40px #fdfcdc, 0 0 80px rgba(253, 252, 220, 0.4);
-            z-index: -2;
-        }
-
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(white 1px, transparent 0);
-            background-size: 50px 50px;
-            opacity: 0.3;
-            z-index: -2;
-        }
-
-        .fog {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 150px;
-            background: linear-gradient(transparent, rgba(123, 44, 191, 0.15));
-            z-index: -1;
-            animation: moveFog 20s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes moveFog {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(-25%); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Container Principal */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            justify-content: space-between;
-        }
-
-        header {
-            text-align: center;
-            margin-top: 30px;
-            z-index: 10;
-        }
-
-        header h1 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            color: var(--primary-orange);
-            text-shadow: 0 0 15px rgba(255, 123, 0, 0.5), 0 0 30px rgba(123, 44, 191, 0.6);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Seção de Jogos (Menu) */
-        .menu-section {
-            width: 100%;
-            margin: 40px 0;
-            z-index: 10;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--accent-purple);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            justify-content: center;
-        }
-
-        .game-card {
-            background: var(--bg-card);
-            border: 2px solid var(--primary-purple);
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(123, 44, 191, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 12px 30px rgba(255, 123, 0, 0.3), inset 0 0 20px rgba(255, 123, 0, 0.2);
-        }
-
-        .game-card h3 {
-            font-size: 1.4rem;
-            color: var(--text-light);
-            margin-bottom: 12px;
-        }
-
-        .game-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, var(--primary-orange), #d95c00);
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
-        }
-
-        .btn:hover {
-            background: linear-gradient(135deg, var(--accent-orange), var(--primary-orange));
-            box-shadow: 0 6px 20px rgba(255, 123, 0, 0.6);
-            transform: scale(1.05);
-        }
-
-        /* Seção de Ranking Global */
-        .ranking-container {
-            width: 100%;
-            max-width: 700px;
-            background: var(--bg-card);
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
-
-        .ranking-title {
-            text-align: center;
-            color: var(--primary-orange);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        .ranking-list {
-            list-style: none;
-            max-height: 200px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .ranking-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .ranking-list::-webkit-scrollbar-thumb {
-            background: var(--primary-purple);
-            border-radius: 3px;
-        }
-
-        .ranking-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            background: rgba(19, 13, 34, 0.6);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-purple);
-            font-size: 0.95rem;
-        }
-
-        .ranking-item:nth-child(1) { border-left-color: #ffd700; }
-        .ranking-item:nth-child(2) { border-left-color: #c0c0c0; }
-        .ranking-item:nth-child(3) { border-left-color: #cd7f32; }
-
-        .ranking-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ranking-score {
-            font-weight: bold;
-            color: var(--accent-orange);
-        }
-
-        /* Tela de Jogo Ativo */
-        #game-screen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-deep);
-            z-index: 100;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        .game-header {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
-            border: 2px solid var(--primary-purple);
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .game-info-title {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .game-info-score {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        .game-arena {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            flex-grow: 1;
-            margin: 20px 0;
-            background: radial-gradient(circle at center, #18102a 0%, #0d0817 100%);
-            border: 2px dashed var(--primary-purple);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
-        }
-
-        /* Jogo 1: Pega Abóboras Elements */
-        .falling-object {
-            position: absolute;
-            width: 55px;
-            height: 55px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            transition: transform 0.1s;
-            touch-action: manipulation;
-        }
-
-        .falling-object:active {
-            transform: scale(0.85);
-        }
-
-        /* Jogo 2: Bater no Castor Elements */
-        .whack-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: 100%;
-            max-width: 450px;
-            height: 100%;
-            max-height: 450px;
-            margin: auto;
-            align-content: center;
-            justify-items: center;
-            padding: 20px;
-        }
-
-        .hole {
-            width: 90px;
-            height: 90px;
-            background: #08050e;
-            border: 4px solid var(--primary-purple);
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 10px 15px rgba(0,0,0,0.9);
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-
-        .mole {
-            position: absolute;
-            bottom: -100%;
-            left: 10px;
-            width: 70px;
-            height: 70px;
-            background: #4a2e1b;
-            border-radius: 50% 50% 20% 20%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            transition: bottom 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .mole.up {
-            bottom: 10px;
-        }
-
-        .hole.bomb-hole .mole {
-            background: #2a2a2a;
-        }
-
-        /* Tela de Game Over Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 6, 18, 0.85);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-        }
-
-        .modal-card {
-            background: var(--bg-card);
-            border: 2px solid var(--danger);
-            border-radius: 16px;
-            padding: 35px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.3);
-            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes modalPop {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-card h2 {
-            color: var(--danger);
-            font-size: 2rem;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
-        }
-
-        .modal-card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .modal-card input {
-            width: 100%;
-            padding: 12px;
-            background: var(--bg-deep);
-            border: 1px solid var(--primary-purple);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .modal-card input:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-        }
-
-        /* Transição Temática (Bruxa) */
-        #witch-transition {
-            position: fixed;
-            top: 0;
-            left: -200px;
-            width: 150px;
-            height: 100px;
-            z-index: 999;
-            pointer-events: none;
-            font-size: 5rem;
-            transition: transform 1.5s linear;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes flyWitch {
-            0% { transform: translate(0, 50vh) scaleX(1); }
-            50% { transform: translate(50vw, 20vh) scaleX(1) rotate(-10deg); }
-            100% { transform: translate(120vw, 10vh) scaleX(1); }
-        }
-
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            padding: 20px 0;
-            z-index: 10;
-        }
-    </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:radial-gradient(circle at top,#492052,#180b23 45%,#050308);color:#fff;font-family:Arial;text-align:center}
+header{padding:30px 15px}.logo{font-size:65px;filter:drop-shadow(0 0 20px #f50)}
+h1{color:#ff8b27;text-shadow:0 0 15px #f40;font-size:clamp(25px,7vw,45px)}
+.subtitle{color:#cdbbd4;margin-top:8px}
+#menu{width:94%;max-width:1000px;margin:auto}
+.section-title{font-size:22px;margin:25px}.section-title span,h2{color:#ff963e}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card,#ranking{padding:25px;border-radius:24px;background:linear-gradient(145deg,#291432,#0c0711);border:1px solid #8d4da5;box-shadow:0 15px 40px #000b}
+.card-icon{font-size:75px;margin:5px}.card h2{margin:10px}.card p{color:#b9aabd;line-height:1.5;min-height:70px}
+button{border:0;border-radius:13px;padding:15px;margin:10px;color:#fff;font-weight:bold;font-size:16px;cursor:pointer;background:linear-gradient(135deg,#ff8b20,#d43800)}
+.help{margin-top:10px;padding:13px;border-radius:13px;background:#05030888;color:#c7b8cc;font-size:13px;line-height:1.7}
+#ranking{margin:30px 0}.rankrow{display:flex;justify-content:space-between;padding:10px;margin:5px auto;max-width:600px;background:#ffffff08;border-radius:10px}.rank-points{color:#ffad52;font-weight:bold}
+#game{display:none;padding:10px 5px 30px}
+.info{display:inline-block;padding:9px 20px;margin:5px 0 15px;border-radius:20px;background:#110918;border:1px solid #ff7417;font-size:20px}
+#score{color:#ffad52}
+.arena{position:relative;width:96%;max-width:650px;height:500px;margin:auto;overflow:hidden;border:2px solid #ff7417;border-radius:25px;background:linear-gradient(160deg,#281332,#0b0710 70%,#170a15);touch-action:none}
+.mole-bg{background:linear-gradient(#10091b 0%,#24142e 40%,#382519 41%,#0b0705 100%)}
+.ground{position:absolute;bottom:0;width:100%;height:15px;background:#ff6500;box-shadow:0 0 20px #f50}
+.item{position:absolute;font-size:70px;transform:translate(-50%,-50%);z-index:10;cursor:pointer;user-select:none}
+.hole{position:absolute;width:78px;height:43px;border-radius:50%;background:#020101;border:3px solid #4d3020;transform:translate(-50%,-50%);z-index:3}
+#countdown{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:#050208bb;font-size:90px;font-weight:bold;color:#ff8a22;text-shadow:0 0 30px #f30}
+.hit{position:absolute;font-size:38px;color:#ffb23e;pointer-events:none;z-index:30;animation:hit .5s forwards}
+@keyframes hit{to{transform:scale(1.7) translateY(-40px);opacity:0}}
+.gameover{display:none;position:absolute;inset:0;z-index:50;align-items:center;justify-content:center;background:#050208dd}
+.gameover-box{width:90%;max-width:370px;padding:25px;border-radius:22px;background:#1b0d21;border:1px solid #ff7417}
+.final{font-size:40px;color:#ffb052;margin:10px}
+input{width:90%;padding:13px;border-radius:10px;background:#050308;color:#fff;border:1px solid #555;text-align:center;font-size:16px}
+.back{background:#241b29}
+@media(max-width:600px){.arena{height:470px}.item{font-size:64px}.hole{width:65px;height:37px}}
+</style>
 </head>
+
 <body>
 
-    <div class="night-sky"></div>
-    <div class="moon"></div>
-    <div class="stars"></div>
-    <div class="fog"></div>
+<header>
+<div class="logo">🎃</div>
+<h1>HALLOWEEN NA NEXUS COMMUNITY</h1>
+<div class="subtitle">👻 Portal de jogos • 🏆 Ranking • 🎃 Halloween</div>
+</header>
 
-    <div id="witch-transition">🦇🧹</div>
+<div id="menu">
+<div class="section-title">🎮 <span>ESCOLHA SEU JOGO</span></div>
 
-    <div class="container" id="main-menu">
-        <header>
-            <h1>🎃 HALLOWEEN NA NEXUS COMMUNITY</h1>
-            <p>Bem-vindo ao portal oficial de jogos, ranking e terror da comunidade. Escolha seu desafio e entre para o Hall da Fama!</p>
-        </header>
+<div class="games">
 
-        <section class="menu-section">
-            <h2 class="section-title">Escolha seu Jogo</h2>
-            <div class="games-grid">
-                <div class="game-card" onclick="startGame('pumpkins')">
-                    <h3>🎃 Pega Abóboras</h3>
-                    <p>Abóboras caem rapidamente do céu noturno. Capture o máximo que puder e desvie das bombas letais!</p>
-                    <button class="btn">Jogar Agora</button>
-                </div>
-                <div class="game-card" onclick="startGame('whack')">
-                    <h3>🔨 Bater no Castor</h3>
-                    <p>Castores assustadores aparecem velozmente nos túmulos. Seja rápido no reflexo e cuidado com as armadilhas!</p>
-                    <button class="btn">Jogar Agora</button>
-                </div>
-            </div>
-        </section>
+<div class="card">
+<div class="card-icon">🎃</div>
+<h2>PEGA ABÓBORAS</h2>
+<p>As abóboras estão caindo! Pegue o máximo antes que uma toque o chão.</p>
+<button onclick="openGame('pump')">▶ COMEÇAR JOGO</button>
+<div class="help">🎃 +1 ponto<br>💣 Bomba no chão não importa<br>💥 Clique na bomba = Game Over<br>⚠️ Abóbora no chão = Game Over</div>
+</div>
 
-        <div class="ranking-container">
-            <h3 class="ranking-title">🏆 Ranking dos Melhores Caçadores</h3>
-            <ul class="ranking-list" id="ranking-list">
-                </ul>
-        </div>
+<div class="card">
+<div class="card-icon">🔨</div>
+<h2>BATER NO CASTOR</h2>
+<p>Os castores estão escondidos nos buracos. Seja rápido e acerte-os!</p>
+<button onclick="openGame('mole')">▶ COMEÇAR JOGO</button>
+<div class="help">🦫 +1 ponto<br>💣 Clique na bomba = Game Over<br>🕳️ 7 buracos diferentes<br>⚡ A velocidade aumenta</div>
+</div>
 
-        <footer>
-            &copy; 2026 Nexus Community. Todos os direitos reservados à atmosfera sombria.
-        </footer>
-    </div>
+</div>
 
-    <div id="game-screen">
-        <div class="game-header">
-            <div class="game-info-title" id="active-game-title">Título do Jogo</div>
-            <div class="game-info-score">Pontos: <span id="current-score">0</span></div>
-            <button class="btn" style="padding: 6px 14px; font-size: 0.85rem; background: var(--danger);" onclick="returnToMenu()">Voltar ao Menu</button>
-        </div>
+<div id="ranking">
+<h2>🏆 RANKING DOS PESADELOS</h2>
+<div id="rank"></div>
+</div>
+</div>
 
-        <div class="game-arena" id="game-arena">
-            </div>
-    </div>
+<div id="game">
+<h2 id="title"></h2>
+<div class="info">🏆 <span id="score">0</span></div>
 
-    <div class="modal-overlay" id="game-over-modal">
-        <div class="modal-card">
-            <h2>GAME OVER</h2>
-            <p>Sua pontuação final: <strong id="final-score" style="color: var(--accent-orange);">0</strong></p>
-            <input type="text" id="player-name" placeholder="Digite seu apelido..." maxlength="15">
-            <button class="btn" style="width: 100%;" onclick="saveScore()">Salvar no Ranking</button>
-        </div>
-    </div>
+<div class="arena" id="arena">
+<div id="countdown"></div>
 
-    <script>
-        // Variáveis Globais de Estado
-        let currentGame = null;
-        let score = 0;
-        let gameInterval = null;
-        let gameLoopTimer = null;
-        let activeElements = [];
-        let difficultyMultiplier = 1;
+<div class="hole" id="h1"></div><div class="hole" id="h2"></div>
+<div class="hole" id="h3"></div><div class="hole" id="h4"></div>
+<div class="hole" id="h5"></div><div class="hole" id="h6"></div>
+<div class="hole" id="h7"></div>
 
-        // Gerenciamento de Ranking com localStorage
-        function getRanking() {
-            const data = localStorage.getItem('nexus_halloween_ranking');
-            return data ? JSON.parse(data) : [
-                { name: 'ShadowWitch', score: 25 },
-                { name: 'PumpkinKing', score: 18 },
-                { name: 'GhostRider', score: 12 }
-            ];
-        }
+<div class="ground"></div>
 
-        function renderRanking() {
-            const listEl = document.getElementById('ranking-list');
-            const ranking = getRanking();
-            ranking.sort((a, b) => b.score - a.score);
+<div class="gameover" id="gameover">
+<div class="gameover-box">
+<h2>💀 GAME OVER</h2>
+<p>Sua pontuação</p>
+<div class="final" id="finalScore">0</div>
+<p>Digite seu nome:</p>
+<input id="playerName" maxlength="18" placeholder="Seu nome">
+<br>
+<button onclick="saveScore()">🏆 SALVAR PONTUAÇÃO</button>
+</div>
+</div>
+</div>
 
-            listEl.innerHTML = '';
-            ranking.forEach((item, index) => {
-                let medal = '';
-                if (index === 0) medal = '🥇 ';
-                else if (index === 1) medal = '🥈 ';
-                else if (index === 2) medal = '🥉 ';
-                else medal = `${index + 1}. `;
+<p id="message">Prepare-se...</p>
+<button class="back" onclick="back()">⬅ VOLTAR AO MENU</button>
+</div>
 
-                const li = document.createElement('li');
-                li.className = 'ranking-item';
-                li.innerHTML = `
-                    <div class="ranking-user"><span>${medal}</span><strong>${escapeHtml(item.name)}</strong></div>
-                    <div class="ranking-score">${item.score} pts</div>
-                `;
-                listEl.appendChild(li);
-            });
-        }
+<script>
+let type='',score=0,running=false,items=[],last=0,start=0,spawnDelay=900,moleTimer;
 
-        function escapeHtml(text) {
-            return text.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
-        }
+const $=id=>document.getElementById(id),arena=$('arena');
 
-        // Transição Temática e Início do Jogo
-        function startGame(gameType) {
-            currentGame = gameType;
-            
-            // Ativar animação da bruxa/morcegos voando
-            const witch = document.getElementById('witch-transition');
-            witch.style.animation = 'none';
-            void witch.offsetHeight; // Forçar reflow
-            witch.style.animation = 'flyWitch 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+function openGame(t){
+ type=t;running=false;clearTimeout(moleTimer);
+ $('menu').style.display='none';
+ document.querySelector('header').style.display='none';
+ $('game').style.display='block';
+ $('title').textContent=t==='pump'?'🎃 PEGA ABÓBORAS':'🔨 BATER NO CASTOR';
+ arena.className='arena '+(t==='pump'?'':'mole-bg');
+ $('gameover').style.display='none';
+ $('score').textContent=score=0;
+ arena.querySelectorAll('.item').forEach(e=>e.remove());
+ if(t==='mole')setupHoles();
+ count();
+}
 
-            setTimeout(() => {
-                document.getElementById('main-menu').style.display = 'none';
-                const screen = document.getElementById('game-screen');
-                screen.style.display = 'flex';
-                
-                initGameEngine();
-            }, 600); // Transição suave integrada sem travar a abertura
-        }
+function setupHoles(){
+ [[15,25],[50,20],[85,27],[25,48],[70,48],[15,75],[50,78]].forEach((p,i)=>{
+  let h=$('h'+(i+1));h.style.left=p[0]+'%';h.style.top=p[1]+'%';
+ });
+}
 
-        function returnToMenu() {
-            stopGameEngine();
-            document.getElementById('game-screen').style.display = 'none';
-            document.getElementById('game-over-modal').style.display = 'none';
-            document.getElementById('main-menu').style.display = 'flex';
-            renderRanking();
-        }
+function count(){
+ let b=$('countdown'),n=['3','2','1','GO!'],i=0;
+ b.style.display='flex';b.textContent=n[0];
+ let x=setInterval(()=>{
+  if(++i<n.length)b.textContent=n[i];
+  else{clearInterval(x);b.style.display='none';startGame()}
+ },600);
+}
 
-        function stopGameEngine() {
-            if (gameInterval) clearInterval(gameInterval);
-            if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
-            activeElements.forEach(el => {
-                if (el && el.parentNode) el.parentNode.removeChild(el);
-            });
-            activeElements = [];
-        }
+function startGame(){
+ running=true;items=[];start=last=performance.now();spawnDelay=900;
+ if(type==='mole')mole();
+ requestAnimationFrame(loop);
+}
 
-        // Motor do Jogo
-        function initGameEngine() {
-            score = 0;
-            difficultyMultiplier = 1;
-            document.getElementById('current-score').textContent = score;
-            const arena = document.getElementById('game-arena');
-            arena.innerHTML = '';
+function loop(t){
+ if(!running)return;
+ let dt=Math.min((t-last)/1000,.05);last=t;
+ let elapsed=(t-start)/1000;
+ spawnDelay=Math.max(300,900-elapsed*20);
 
-            if (currentGame === 'pumpkins') {
-                document.getElementById('active-game-title').textContent = '🎃 Pega Abóboras';
-                initPumpkinsGame(arena);
-            } else if (currentGame === 'whack') {
-                document.getElementById('active-game-title').textContent = '🔨 Bater no Castor';
-                initWhackGame(arena);
-            }
-        }
+ if(type==='pump'){
+  if(t-start>spawnDelay+elapsed*0&&t-(window.lastSpawn||0)>spawnDelay){
+   pump();window.lastSpawn=t;
+  }
 
-        // ================= JOGO 1: PEGA ABÓBORAS ================
-        function initPumpkinsGame(arena) {
-            let spawnRate = 1200; // ms
+  for(let i=items.length-1;i>=0;i--){
+   let o=items[i];o.y+=o.speed*dt;o.el.style.top=o.y+'px';
+   if(o.y>arena.clientHeight-30){
+    if(!o.bomb){lose('Uma abóbora tocou o chão!');return}
+    remove(o);
+   }
+  }
+ }
+ requestAnimationFrame(loop);
+}
 
-            function spawnItem() {
-                if (currentGame !== 'pumpkins') return;
+function pump(){
+ let e=document.createElement('div'),bomb=Math.random()<.18;
+ e.className='item';e.textContent=bomb?'💣':'🎃';
+ let x=40+Math.random()*(arena.clientWidth-80),y=-40;
+ e.style.left=x+'px';e.style.top=y+'px';arena.appendChild(e);
+ let o={el:e,y,speed:110+Math.random()*90+(performance.now()-start)/1000*3,bomb};
+ items.push(o);
+ e.onpointerdown=ev=>{
+  ev.preventDefault();
+  if(!running)return;
+  if(bomb)lose('Você clicou na bomba!');
+  else{score++;$('score').textContent=score;hit(x,y);remove(o)}
+ };
+}
 
-                const item = document.createElement('div');
-                item.className = 'falling-object';
-                
-                // 25% de chance de ser bomba
-                const isBomb = Math.random() < 0.25;
-                item.innerHTML = isBomb ? '💣' : '🎃';
-                
-                const arenaWidth = arena.clientWidth - 60;
-                const startX = Math.random() * Math.max(0, arenaWidth);
-                item.style.left = startX + 'px';
-                item.style.top = '-60px';
+function mole(){
+ if(!running)return;
+ document.querySelectorAll('.moleTarget').forEach(e=>e.remove());
+ let h=$('h'+(1+Math.floor(Math.random()*7))),e=document.createElement('div');
+ e.className='item moleTarget';
+ let bomb=Math.random()<.16;
+ e.textContent=bomb?'💣':'🦫';e.style.fontSize='60px';h.appendChild(e);
+ let hit=false,life=Math.max(350,1000-score*18);
+ e.onpointerdown=ev=>{
+  ev.preventDefault();if(!running||hit)return;hit=true;
+  if(bomb){lose('Você acertou uma bomba!');return}
+  score++;$('score').textContent=score;hit(h.offsetLeft,h.offsetTop);e.remove();
+  clearTimeout(moleTimer);moleTimer=setTimeout(mole,Math.max(280,850-score*12));
+ };
+ moleTimer=setTimeout(()=>{e.remove();mole()},life);
+}
 
-                arena.appendChild(item);
-                activeElements.push(item);
+function hit(x,y){
+ let e=document.createElement('div');e.className='hit';e.textContent='+1';
+ e.style.left=x+'px';e.style.top=y+'px';arena.appendChild(e);
+ setTimeout(()=>e.remove(),500);
+}
 
-                let currentY = -60;
-                // Velocidade base aumentada gradualmente com o score
-                let speed = (2 + Math.random() * 1.5) * difficultyMultiplier;
+function remove(o){
+ if(o.el)o.el.remove();
+ items=items.filter(x=>x!==o);
+}
 
-                function fall() {
-                    if (currentGame !== 'pumpkins') return;
-                    currentY += speed;
-                    item.style.top = currentY + 'px';
+function lose(reason){
+ if(!running)return;
+ running=false;clearTimeout(moleTimer);
+ $('finalScore').textContent=score;
+ $('message').textContent=reason;
+ $('gameover').style.display='flex';
+}
 
-                    // Checar colisão com o chão
-                    if (currentY > arena.clientHeight - 50) {
-                        if (!isBomb) {
-                            // Abóbora chegou ao chão sem clique = Game Over
-                            triggerGameOver();
-                            return;
-                        } else {
-                            // Bomba caiu no chão, apenas remove
-                            removeElement(item);
-                            return;
-                        }
-                    }
+function saveScore(){
+ let name=$('playerName').value.trim()||'Anônimo';
+ let r=JSON.parse(localStorage.getItem('nexusRank')||'[]');
+ r.push({name,score});r.sort((a,b)=>b.score-a.score);
+ localStorage.setItem('nexusRank',JSON.stringify(r.slice(0,10)));
+ $('playerName').value='';
+ $('gameover').style.display='none';
+ back();ranking();
+}
 
-                    item.fallFrame = requestAnimationFrame(fall);
-                }
-                item.fallFrame = requestAnimationFrame(fall);
+function ranking(){
+ let r=JSON.parse(localStorage.getItem('nexusRank')||'[]');
+ $('rank').innerHTML=r.length?r.map((x,i)=>`<div class="rankrow"><span>🏅 ${i+1}. ${x.name}</span><b class="rank-points">${x.score}</b></div>`).join(''):'<p style="color:#aaa">Nenhuma pontuação ainda</p>';
+}
 
-                // Evento de toque/clique
-                const handleInteract = (e) => {
-                    e.preventDefault();
-                    if (isBomb) {
-                        triggerGameOver();
-                    } else {
-                        score += 1;
-                        document.getElementById('current-score').textContent = score;
-                        difficultyMultiplier = 1 + (score * 0.05); // Aumenta dificuldade progressivamente
-                        createScorePopup(item.offsetLeft + 25, item.offsetTop, '+1', 'var(--success)');
-                        removeElement(item);
-                    }
-                };
+function back(){
+ running=false;clearTimeout(moleTimer);
+ $('game').style.display='none';
+ $('menu').style.display='block';
+ document.querySelector('header').style.display='block';
+ arena.querySelectorAll('.item').forEach(e=>e.remove());
+}
 
-                item.addEventListener('pointerdown', handleInteract);
-
-                // Reagendar próximo spawn
-                let nextSpawn = Math.max(400, spawnRate - (score * 30));
-                gameInterval = setTimeout(spawnItem, nextSpawn);
-            }
-
-            spawnItem();
-        }
-
-        // ================= JOGO 2: BATER NO CASTOR =================
-        function initWhackGame(arena) {
-            let gridHTML = '<div class="whack-grid">';
-            for (let i = 0; i < 7; i++) {
-                gridHTML += `<div class="hole" data-index="${i}"><div class="mole">🦫</div></div>`;
-            }
-            gridHTML += '</div>';
-            arena.innerHTML = gridHTML;
-
-            const holes = arena.querySelectorAll('.hole');
-            let activeHoleTimer = null;
-            let currentActiveHole = null;
-
-            function popMole() {
-                if (currentGame !== 'whack') return;
-
-                // Esconder anterior se houver
-                if (currentActiveHole) {
-                    currentActiveHole.querySelector('.mole').classList.remove('up');
-                    currentActiveHole.classList.remove('bomb-hole');
-                }
-
-                // Escolher buraco aleatório
-                const randomIdx = Math.floor(Math.random() * holes.length);
-                const hole = holes[randomIdx];
-                currentActiveHole = hole;
-
-                const isBomb = Math.random() < 0.25;
-                const moleEl = hole.querySelector('.mole');
-                moleEl.innerHTML = isBomb ? '💣' : '🦫';
-                if (isBomb) hole.classList.add('bomb-hole');
-
-                moleEl.classList.add('up');
-
-                // Tempo que o castor fica visível diminui conforme score sobe
-                let visibleTime = Math.max(600, 1400 - (score * 45));
-
-                activeHoleTimer = setTimeout(() => {
-                    if (currentActiveHole === hole) {
-                        moleEl.classList.remove('up');
-                        hole.classList.remove('bomb-hole');
-                    }
-                    // Próximo pop mais rápido
-                    let nextDelay = Math.max(200, 800 - (score * 25));
-                    gameInterval = setTimeout(popMole, nextDelay);
-                }, visibleTime);
-            }
-
-            // Registrar cliques nos buracos
-            holes.forEach(hole => {
-                const handleHoleClick = (e) => {
-                    e.preventDefault();
-                    const mole = hole.querySelector('.mole');
-                    if (mole.classList.contains('up')) {
-                        const isBomb = hole.classList.contains('bomb-hole');
-                        if (isBomb) {
-                            triggerGameOver();
-                        } else {
-                            score += 1;
-                            document.getElementById('current-score').textContent = score;
-                            mole.classList.remove('up');
-                            hole.classList.remove('bomb-hole');
-                            createScorePopup(e.clientX || (e.touches && e.touches[0].clientX), e.clientY || (e.touches && e.touches[0].clientY), '+1', 'var(--success)');
-                        }
-                    }
-                };
-                hole.addEventListener('pointerdown', handleHoleClick);
-            });
-
-            popMole();
-        }
-
-        // Funções Auxiliares de Jogo
-        function removeElement(item) {
-            if (item.fallFrame) cancelAnimationFrame(item.fallFrame);
-            if (item && item.parentNode) {
-                item.parentNode.removeChild(item);
-            }
-            const idx = activeElements.indexOf(item);
-            if (idx > -1) activeElements.splice(idx, 1);
-        }
-
-        function createScorePopup(x, y, text, color) {
-            const popup = document.createElement('div');
-            popup.textContent = text;
-            popup.style.position = 'fixed';
-            popup.style.left = x + 'px';
-            popup.style.top = y + 'px';
-            popup.style.color = color;
-            popup.style.fontWeight = 'bold';
-            popup.style.fontSize = '1.3rem';
-            popup.style.zIndex = '300';
-            popup.style.pointerEvents = 'none';
-            popup.style.transition = 'all 0.5s ease-out';
-            document.body.appendChild(popup);
-
-            setTimeout(() => {
-                popup.style.transform = 'translateY(-30px)';
-                popup.style.opacity = '0';
-            }, 20);
-
-            setTimeout(() => {
-                if (popup.parentNode) popup.parentNode.removeChild(popup);
-            }, 500);
-        }
-
-        function triggerGameOver() {
-            stopGameEngine();
-            document.getElementById('final-score').textContent = score;
-            document.getElementById('player-name').value = '';
-            document.getElementById('game-over-modal').style.display = 'flex';
-        }
-
-        function saveScore() {
-            const nameInput = document.getElementById('player-name').value.trim();
-            const playerName = nameInput ? nameInput : 'Caçador Anônimo';
-
-            const ranking = getRanking();
-            ranking.push({ name: playerName, score: score });
-            ranking.sort((a, b) => b.score - a.score);
-            
-            // Manter apenas os top 10 para otimizar armazenamento
-            const topRanking = ranking.slice(0, 10);
-            localStorage.setItem('nexus_halloween_ranking', JSON.stringify(topRanking));
-
-            document.getElementById('game-over-modal').style.display = 'none';
-            returnToMenu();
-        }
-
-        // Inicializar listagem de ranking ao carregar a página
-        window.addEventListener('DOMContentLoaded', () => {
-            renderRanking();
-        });
-    </script>
+ranking();
+</script>
 </body>
-</html
+</html>
