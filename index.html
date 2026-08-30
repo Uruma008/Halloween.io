@@ -100,7 +100,9 @@ body{
  to{transform:translateX(8%)}
 }
 
-/* TRANSIÇÃO DA BRUXA */
+/* =========================
+ TRANSIÇÃO DA BRUXA
+========================= */
 
 .transition{
  position:fixed;
@@ -116,6 +118,15 @@ body{
 
 .transition.show{
  display:flex;
+}
+
+.transition.witch-fly{
+ animation:darken .7s forwards;
+}
+
+@keyframes darken{
+ from{opacity:0}
+ to{opacity:1}
 }
 
 .witch{
@@ -170,7 +181,70 @@ body{
  to{opacity:.5}
 }
 
-/* HEADER */
+/* =========================
+ ENTRADA
+========================= */
+
+.intro{
+ position:fixed;
+ inset:0;
+ z-index:9998;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:
+ radial-gradient(circle at center,#32153d,#08040d 70%);
+ transition:opacity .8s,visibility .8s;
+}
+
+.intro.hide{
+ opacity:0;
+ visibility:hidden;
+ pointer-events:none;
+}
+
+.intro-box{
+ padding:30px;
+ animation:introBox 1.2s ease-out;
+}
+
+@keyframes introBox{
+ from{
+  transform:scale(.6);
+  opacity:0;
+ }
+ to{
+  transform:scale(1);
+  opacity:1;
+ }
+}
+
+.intro-pumpkin{
+ font-size:95px;
+ filter:drop-shadow(0 0 25px #ff5b00);
+ animation:introPumpkin 1.8s infinite ease-in-out;
+}
+
+@keyframes introPumpkin{
+ 50%{
+  transform:scale(1.08) rotate(4deg);
+ }
+}
+
+.intro h2{
+ color:#ff8b27;
+ font-size:27px;
+ text-shadow:0 0 15px #ff4500;
+}
+
+.intro p{
+ margin-top:10px;
+ color:#bdaec3;
+}
+
+/* =========================
+ HEADER
+========================= */
 
 header{
  padding:30px 15px 15px;
@@ -201,7 +275,9 @@ h1{
  color:#cdbbd4;
 }
 
-/* MENU */
+/* =========================
+ MENU
+========================= */
 
 #menu{
  width:94%;
@@ -273,9 +349,7 @@ h1{
  min-height:70px;
 }
 
-.play,
-.save,
-.back{
+.play{
  position:relative;
  overflow:hidden;
  width:90%;
@@ -296,8 +370,7 @@ h1{
  cursor:pointer;
 }
 
-.play:after,
-.save:after{
+.play:after{
  content:"";
  position:absolute;
  width:70px;
@@ -309,8 +382,7 @@ h1{
  transition:.5s;
 }
 
-.play:hover:after,
-.save:hover:after{
+.play:hover:after{
  left:120%;
 }
 
@@ -325,7 +397,9 @@ h1{
  line-height:1.7;
 }
 
-/* RANKING */
+/* =========================
+ RANKING
+========================= */
 
 #ranking{
  margin-top:30px;
@@ -372,7 +446,9 @@ h1{
  font-weight:bold;
 }
 
-/* JOGO */
+/* =========================
+ JOGO
+========================= */
 
 #game{
  display:none;
@@ -519,19 +595,11 @@ h1{
 
  border-radius:50%;
 
- background:
- radial-gradient(
-  ellipse at center,
-  #020101 0 50%,
-  #160d08 70%,
-  transparent 72%
- );
+ background:radial-gradient(ellipse at center,#020101 0 50%,#160d08 70%,transparent 72%);
 
  border:3px solid #4d3020;
 
- box-shadow:
- inset 0 5px 10px #000,
- 0 4px 5px #0008;
+ box-shadow:inset 0 5px 10px #000,0 4px 5px #0008;
 
  transform:translate(-50%,-50%);
 
@@ -557,22 +625,14 @@ h1{
 
  color:#ff8a22;
 
- text-shadow:
- 0 0 15px #ff5b00,
- 0 0 50px #ff3c00;
+ text-shadow:0 0 15px #ff5b00,0 0 50px #ff3c00;
 
  animation:countPulse .7s;
 }
 
 @keyframes countPulse{
- 0%{
-  transform:scale(1.5);
-  opacity:0;
- }
- 100%{
-  transform:scale(1);
-  opacity:1;
- }
+ 0%{transform:scale(1.5);opacity:0}
+ 100%{transform:scale(1);opacity:1}
 }
 
 /* ACERTO */
@@ -695,15 +755,6 @@ h1{
  border:1px solid #ffffff15;
 }
 
-/* MENSAGEM */
-
-.message{
- margin:12px auto;
- min-height:24px;
- color:#c7b8cc;
- font-size:15px;
-}
-
 /* MOBILE */
 
 @media(max-width:600px){
@@ -747,9 +798,37 @@ h1{
 
 <body>
 
-<!-- TRANSIÇÃO -->
 
-<div class="transition" id="transition">
+<!-- =========================
+ TELA DE ENTRADA
+========================= -->
+
+<div class="intro hide" id="intro">
+
+ <div class="intro-box">
+
+  <div class="intro-pumpkin">
+   🎃
+  </div>
+
+  <h2>
+   HALLOWEEN NA NEXUS
+  </h2>
+
+  <p>
+   Prepare-se para entrar...
+  </p>
+
+ </div>
+
+</div>
+
+
+<!-- =========================
+ TRANSIÇÃO
+========================= -->
+
+<div class="transition" id="transition" style="display:none !important;">
 
  <div class="witch" id="witch">
   🧙‍♀️
@@ -760,6 +839,7 @@ h1{
  </div>
 
 </div>
+
 
 <!-- FUNDO -->
 
@@ -791,6 +871,7 @@ h1{
 
 </div>
 
+
 <!-- HEADER -->
 
 <header>
@@ -809,6 +890,7 @@ h1{
 
 </header>
 
+
 <!-- MENU -->
 
 <div id="menu">
@@ -817,7 +899,9 @@ h1{
   🎮 <span>ESCOLHA SEU JOGO</span>
  </div>
 
+
  <div class="games">
+
 
   <!-- PEGA ABÓBORAS -->
 
@@ -854,6 +938,7 @@ h1{
    </div>
 
   </div>
+
 
   <!-- CASTOR -->
 
@@ -893,6 +978,7 @@ h1{
 
  </div>
 
+
  <!-- RANKING -->
 
  <div id="ranking">
@@ -907,7 +993,10 @@ h1{
 
 </div>
 
-<!-- JOGO -->
+
+<!-- =========================
+ JOGO
+========================= -->
 
 <div id="game">
 
@@ -916,6 +1005,7 @@ h1{
  <div class="info">
   🏆 <span id="score">0</span>
  </div>
+
 
  <div
   class="arena"
@@ -934,6 +1024,7 @@ h1{
    🌲
   </div>
 
+
   <!-- 7 BURACOS -->
 
   <div class="hole" id="h1"></div>
@@ -944,7 +1035,9 @@ h1{
   <div class="hole" id="h6"></div>
   <div class="hole" id="h7"></div>
 
+
   <div class="ground"></div>
+
 
   <!-- GAME OVER -->
 
@@ -997,12 +1090,14 @@ h1{
 
  </div>
 
+
  <div
   class="message"
   id="message"
  >
-  Boa sorte! 👻
+  Prepare-se...
  </div>
+
 
  <button
   class="back"
@@ -1013,603 +1108,21 @@ h1{
 
 </div>
 
+
+
 <script>
-
-/* =========================
- VARIÁVEIS
-========================= */
-
-let type='';
-let score=0;
-let running=false;
-
-let objects=[];
-
-let lastTime=0;
-let lastSpawn=0;
-
-let startTime=0;
-
-let spawnDelay=900;
-
-const arena=
-document.getElementById('arena');
-
+let type='',score=0,running=false,objects=[],lastTime=0,lastSpawn=0,startTime=0,spawnDelay=900,moleTimer=null,countTimer=null;
+const arena=document.getElementById('arena');
 let audio=null;
-
-
-/* =========================
- SOM
-========================= */
-
-function getAudio(){
-
- if(!audio){
-
-  const AudioCtx=
-   window.AudioContext ||
-   window.webkitAudioContext;
-
-  if(!AudioCtx)
-   return null;
-
-  audio=new AudioCtx();
-
- }
-
- if(audio.state==='suspended'){
-  audio.resume();
- }
-
- return audio;
-}
-
-
-function sound(
- freq,
- duration=.1,
- wave='sine'
-){
-
- try{
-
-  let a=getAudio();
-
-  if(!a)
-   return;
-
-  let osc=
-  a.createOscillator();
-
-  let gain=
-  a.createGain();
-
-  osc.type=wave;
-
-  osc.frequency.value=freq;
-
-  gain.gain.setValueAtTime(
-   .08,
-   a.currentTime
-  );
-
-  gain.gain.exponentialRampToValueAtTime(
-   .001,
-   a.currentTime+duration
-  );
-
-  osc.connect(gain);
-
-  gain.connect(a.destination);
-
-  osc.start();
-
-  osc.stop(
-   a.currentTime+duration
-  );
-
- }catch(e){}
-
-}
-
-
-/* =========================
- RISADA
-========================= */
-
-function witchLaugh(){
-
- try{
-
-  let a=getAudio();
-
-  if(!a)
-   return;
-
-  let now=a.currentTime;
-
-  [260,190,280,170,240,130].forEach(
-   (freq,i)=>{
-
-    let osc=
-    a.createOscillator();
-
-    let gain=
-    a.createGain();
-
-    osc.type='sawtooth';
-
-    osc.frequency.setValueAtTime(
-     freq,
-     now+i*.11
-    );
-
-    gain.gain.setValueAtTime(
-     .001,
-     now+i*.11
-    );
-
-    gain.gain.linearRampToValueAtTime(
-     .07,
-     now+i*.11+.04
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-     .001,
-     now+i*.11+.11
-    );
-
-    osc.connect(gain);
-
-    gain.connect(a.destination);
-
-    osc.start(
-     now+i*.11
-    );
-
-    osc.stop(
-     now+i*.11+.12
-    );
-
-   }
-  );
-
- }catch(e){}
-
-}
-
-
-/* =========================
- TRANSIÇÃO
-========================= */
-
-function transition(callback){
-
- let screen=
- document.getElementById(
-  'transition'
- );
-
- let witch=
- document.getElementById(
-  'witch'
- );
-
- screen.classList.add('show');
-
- witch.classList.remove('fly');
-
- void witch.offsetWidth;
-
- witch.classList.add('fly');
-
- witchLaugh();
-
- setTimeout(()=>{
-
-  callback();
-
- },900);
-
- setTimeout(()=>{
-
-  screen.classList.remove('show');
-
-  witch.classList.remove('fly');
-
- },1900);
-
-}
-
-
-/* =========================
- ABRIR JOGO
-========================= */
-
-function openGame(t){
-
- transition(()=>{
-
-  type=t;
-
-  document.getElementById('menu')
-  .style.display='none';
-
-  document.getElementById('game')
-  .style.display='block';
-
-  document.getElementById('title')
-  .textContent=
-  t==='pump'
-  ?
-  '🎃 PEGA ABÓBORAS'
-  :
-  '🔨 BATER NO CASTOR';
-
-  arena.className=
-  'arena '+
-  (
-   t==='pump'
-   ?
-   'pumpkin-bg'
-   :
-   'mole-bg'
-  );
-
-  document.getElementById('gameover')
-  .style.display='none';
-
-  score=0;
-
-  document.getElementById('score')
-  .textContent='0';
-
-  document.getElementById('message')
-  .textContent=
-   t==='pump'
-   ?
-   'Pegue as abóboras! 🎃'
-   :
-   'Acerte os castores! 🦫';
-
-  if(type==='mole')
-   setupHoles();
-
-  countdown();
-
- });
-
-}
-
-
-/* =========================
- BURACOS
-========================= */
-
-function setupHoles(){
-
- let positions=[
-  [15,25],
-  [50,20],
-  [85,27],
-  [25,48],
-  [70,48],
-  [15,75],
-  [50,78]
- ];
-
- positions.forEach((p,i)=>{
-
-  let h=
-  document.getElementById(
-   'h'+(i+1)
-  );
-
-  h.style.left=
-  p[0]+'%';
-
-  h.style.top=
-  p[1]+'%';
-
- });
-
-}
-
-
-/* =========================
- CONTAGEM
-========================= */
-
-function countdown(){
-
- const box=
- document.getElementById(
-  'countdown'
- );
-
- box.style.display='flex';
-
- let nums=[
-  '3',
-  '2',
-  '1',
-  'GO!'
- ];
-
- let i=0;
-
- box.textContent='3';
-
- sound(400,.12);
-
- let timer=
- setInterval(()=>{
-
-  i++;
-
-  if(i>=nums.length){
-
-   clearInterval(timer);
-
-   box.style.display='none';
-
-   sound(
-    900,
-    .2,
-    'square'
-   );
-
-   startGame();
-
-   return;
-
-  }
-
-  box.textContent=
-  nums[i];
-
-  sound(
-   i===3
-   ?900
-   :400,
-   .12
-  );
-
- },700);
-
-}
-
-
-/* =========================
- COMEÇAR
-========================= */
-
-function startGame(){
-
- running=true;
-
- objects=[];
-
- score=0;
-
- startTime=
- performance.now();
-
- lastTime=
- performance.now();
-
- lastSpawn=
- performance.now();
-
- spawnDelay=900;
-
- arena
- .querySelectorAll('.item')
- .forEach(
-  x=>x.remove()
- );
-
- document.getElementById('gameover')
- .style.display='none';
-
- requestAnimationFrame(loop);
-
-}
-
-
-/* =========================
- LOOP
-========================= */
-
-function loop(time){
-
- if(!running)
-  return;
-
- let dt=
- Math.min(
-  (time-lastTime)/1000,
-  .05
- );
-
- lastTime=time;
-
- let elapsed=
- (time-startTime)/1000;
-
- spawnDelay=
- Math.max(
- 280,
- 900-elapsed*22
- );
-
- if(
-  time-lastSpawn>
-  spawnDelay
- ){
-
-  spawn();
-
-  lastSpawn=time;
-
- }
-
- for(
-  let i=objects.length-1;
-  i>=0;
-  i--
- ){
-
-  let o=objects[i];
-
-  if(!o.el.parentNode){
-
-   objects.splice(i,1);
-   continue;
-
-  }
-
-  if(type==='pump'){
-
-   o.y+=
-   o.speed*dt;
-
-   o.el.style.top=
-   o.y+'px';
-
-   if(
-    o.y>=
-    arena.clientHeight-35
-   ){
-
-    if(!o.bomb){
-
-     lose();
-
-     return;
-
-    }else{
-
-     remove(o);
-
-    }
-
-   }
-
-  }else{
-
-   o.life-=dt;
-
-   if(
-    o.life<=0
-   ){
-
-    remove(o);
-
-   }
-
-  }
-
- }
-
- requestAnimationFrame(loop);
-
-}
-
-
-/* =========================
- CRIAR OBJETO
-========================= */
-
-function spawn(){
-
- if(!running)
-  return;
-
- if(type==='pump'){
-
-  spawnPump();
-
- }else{
-
-  spawnMole();
-
- }
-
-}
-
-
-/* =========================
- ABÓBORAS
-========================= */
-
-function spawnPump(){
-
- let el=
- document.createElement('div');
-
- let bomb=
- Math.random()<0.20;
-
- el.className='item';
-
- el.textContent=
- bomb
- ?
- '💣'
- :
- '🎃';
-
- let w=
- arena.clientWidth;
-
- let x=
- 45+
- Math.random()*
- (w-90);
-
- let y=-40;
-
- let speed=
- 100+
- Math.random()*100+
- ((performance.now()-startTime)/1000)*4;
-
- el.style.left=
- x+'px';
-
- el.style.top=
- y+'px';
-
- el.dataset.bomb=
- bomb?'1':'0';
-
- el.onclick=function(e){
-
-  e.stopPropagation();
-
-  if(!running)
-   return;
-
-  if(bomb){
-
-   sound(90,.35,'sawtooth');
-
-   lose();
-
-   return;
-
-  }
-
-  score++;
-
-  document.getElementById('score')
-   .textContent=score;
-
-  hitEffect(
-   x,
-   y,
-   '+1'
-  );
-
-  sound
+function getAudio(){if(!audio){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;audio=new AC()}if(audio.state==='suspended')audio.resume();return audio}
+function sound(f,d=.1,w='sine'){try{const a=getAudio();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=w;o.frequency.value=f;g.gain.setValueAtTime(.07,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+d)}catch(e){}}
+function openGame(t){stopGame();type=t;document.getElementById('menu').style.display='none';document.querySelector('header').style.display='none';document.getElementById('game').style.display='block';document.getElementById('title').textContent=t==='pump'?'🎃 PEGA ABÓBORAS':'🔨 BATER NO CASTOR';arena.className='arena '+(t==='pump'?'pumpkin-bg':'mole-bg');document.getElementById('gameover').style.display='none';document.getElementById('score').textContent='0';document.getElementById('message').textContent=t==='pump'?'Pegue as abóboras! 🎃':'Acerte os castores! 🦫';arena.querySelectorAll('.item').forEach(x=>x.remove());if(t==='mole')setupHoles();countdown()}
+function setupHoles(){[[15,25],[50,20],[85,27],[25,48],[70,48],[15,75],[50,78]].forEach((p,i)=>{const h=document.getElementById('h'+(i+1));h.style.left=p[0]+'%';h.style.top=p[1]+'%';h.innerHTML=''})}
+function countdown(){clearInterval(countTimer);const b=document.getElementById('countdown');b.style.display='flex';const n=['3','2','1','GO!'];let i=0;b.textContent=n[0];sound(400,.12);countTimer=setInterval(()=>{i++;if(i<n.length){b.textContent=n[i];sound(i===3?900:400,.12)}else{clearInterval(countTimer);b.style.display='none';startGame()}},650)}
+function startGame(){stopGame(false);running=true;objects=[];score=0;startTime=performance.now();lastTime=startTime;lastSpawn=startTime;spawnDelay=900;document.getElementById('score').textContent='0';arena.querySelectorAll('.item').forEach(x=>x.remove());if(type==='mole')spawnMole();requestAnimationFrame(loop)}
+function loop(time){if(!running)return;const dt=Math.min((time-lastTime)/1000,.05);lastTime=time;const elapsed=(time-startTime)/1000;if(type==='pump'){spawnDelay=Math.max(300,900-elapsed*20);if(time-lastSpawn>=spawnDelay){spawnPump();lastSpawn=time}for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(!o.el||!o.el.parentNode){objects.splice(i,1);continue}o.y+=o.speed*dt;o.el.style.top=o.y+'px';if(o.y>=arena.clientHeight-30){if(!o.bomb){lose('Uma abóbora tocou o chão!');return}else removeObject(o)}}}requestAnimationFrame(loop)}
+function spawnPump(){if(!running)return;const e=document.createElement('div');e.className='item';const bomb=Math.random()<.18;e.textContent=bomb?'💣':'🎃';const w=arena.clientWidth,x=Math.max(42,Math.min(w-42,45+Math.random()*(w-90))),y=-45,elapsed=(performance.now()-startTime)/1000,speed=105+Math.random()*90+elapsed*3.5;e.style.left=x+'px';e.style.top=y+'px';arena.appendChild(e);const o={el:e,x,y,speed,bomb};objects.push(o);e.addEventListener('pointerdown',ev=>{ev.preventDefault();ev.stopPropagation();if(!running)return;if(bomb){sound(80,.3,'sawtooth');lose('Você clicou na bomba!')}else{score++;document.getElementById('score').textContent=score;hitEffect(x,y,'+1');sound(650,.08,'square');removeObject(o)}})}
+function spawnMole(){if(!running||type!=='mole')return;document.querySelectorAll('.moleTarget').forEach(x=>x.remove());const id=1+Math.floor(Math.random()*7),h=document.getElementById('h'+id),e=document.createElement('div');e.className='item moleTarget';const bomb=Math.random()<.16;e.textContent=bomb?'💣':'🦫';e.style.fontSize=innerWidth<600?'55px':'62px';h.appendChild(e);let hit=false;const life=Math.max(380,1000-score*18);e.addEventListener('pointerdown',ev=>{ev.preventDefault();ev.stopPropagation();if(!running||hit)return;hit=true;if(bomb){sound(80,.3,'sawtooth');lose('Você acertou uma bomba!');return}score++;document.getElementById('score').textContent=score;hitEffect(h.offsetLeft,h.offsetTop,'+1');sound(700,.08,'square');e.remove();clearTimeout(moleTimer);moleTimer=setTimeout(spawnMole,Math.max(280,850-score*12))});moleTimer=setTimeout(()=>{if(e.parentNode)e.remove();if(running)spawnMole()},life)}
+function hitEffect(x,y,t){const e=document.createElement('div');e.className='hit';e.textContent=t;e.style.left=x+'px';e.style.top=y+'px';arena.appendChild(e);setTimeout(()=>e.remove(),500)}
+function removeObject(o){if(o.el&&o.el.parentNode)o.el.remove();const i=objects.indexOf(o);if(i>=0)objects.splice(i,1)}
+function lose(r
