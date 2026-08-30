@@ -4,1329 +4,1050 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Nexus Halloween</title>
+<title>Halloween na Nexus Community</title>
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
 }
 
 :root{
-    --orange:#ff7417;
-    --orange-light:#ffad4d;
-    --orange-dark:#d94300;
-
-    --purple:#8e45c7;
-    --purple-light:#b96bea;
-
-    --black:#07030d;
-    --dark:#100817;
-    --dark2:#170c20;
-
-    --text:#fff;
-    --muted:#bbaec4;
+ --orange:#ff7417;
+ --orange-light:#ffad52;
+ --purple:#8e45c7;
+ --purple-dark:#21102d;
+ --black:#07030b;
+ --white:#fff;
 }
 
 html{
-    scroll-behavior:smooth;
+ scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    overflow-x:hidden;
+ min-height:100vh;
+ overflow-x:hidden;
+ font-family:Arial,Helvetica,sans-serif;
+ color:#fff;
+ text-align:center;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color:var(--text);
-
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            #542464 0%,
-            #25102f 35%,
-            #0b0510 70%,
-            #050207 100%
-        );
+ background:
+ radial-gradient(
+  circle at 50% -10%,
+  #6b2b70 0%,
+  #32143d 28%,
+  #12091a 62%,
+  #050308 100%
+ );
 }
 
-
-/* =========================================================
-   FUNDO
-========================================================= */
+/* =========================
+ FUNDO
+========================= */
 
 .background{
-    position:fixed;
-    inset:0;
-    z-index:-10;
-    overflow:hidden;
-    pointer-events:none;
-}
-
-.glow{
-    position:absolute;
-    width:420px;
-    height:420px;
-
-    border-radius:50%;
-
-    background:#ff7417;
-    opacity:.07;
-
-    filter:blur(100px);
-}
-
-.glow.one{
-    top:-180px;
-    left:-120px;
-}
-
-.glow.two{
-    right:-180px;
-    top:40%;
-    background:#8e45c7;
-}
-
-.glow.three{
-    bottom:-250px;
-    left:35%;
-    background:#ff7417;
-}
-
-.stars{
-    position:absolute;
-    inset:0;
-
-    background-image:
-        radial-gradient(circle,#fff 1px,transparent 1px);
-
-    background-size:
-        75px 75px;
-
-    opacity:.18;
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ pointer-events:none;
+ z-index:-10;
 }
 
 .moon{
-    position:absolute;
+ position:absolute;
+ width:95px;
+ height:95px;
+ right:10%;
+ top:8%;
 
-    width:105px;
-    height:105px;
+ border-radius:50%;
 
-    right:8%;
-    top:7%;
+ background:#fff4d2;
 
-    border-radius:50%;
-
-    background:#fff1ce;
-
-    box-shadow:
-        0 0 25px #fff8,
-        0 0 80px #ffdf9b33;
+ box-shadow:
+ 0 0 20px #fff8,
+ 0 0 70px #fff3;
 }
 
-.moon:after{
-    content:"";
+.star{
+ position:absolute;
+ width:3px;
+ height:3px;
+ border-radius:50%;
+ background:#fff;
 
-    position:absolute;
-
-    width:95px;
-    height:95px;
-
-    left:22px;
-    top:-8px;
-
-    border-radius:50%;
-
-    background:#180a22;
+ animation:
+ twinkle 2s infinite alternate;
 }
 
-
-/* =========================================================
-   MORCEGOS
-========================================================= */
+@keyframes twinkle{
+ from{
+  opacity:.2;
+  transform:scale(.7);
+ }
+ to{
+  opacity:1;
+  transform:scale(1.5);
+ }
+}
 
 .bat{
-    position:absolute;
+ position:absolute;
+ font-size:25px;
+ opacity:.55;
 
-    font-size:25px;
-
-    opacity:.55;
-
-    animation:
-        batFly 14s linear infinite;
+ animation:
+ flyBat 14s linear infinite;
 }
 
-.bat.b1{
-    top:20%;
-    animation-delay:0s;
-}
+@keyframes flyBat{
 
-.bat.b2{
-    top:38%;
-    animation-delay:5s;
-}
+ 0%{
+  left:-10%;
+  transform:translateY(0);
+ }
 
-.bat.b3{
-    top:13%;
-    animation-delay:9s;
-}
+ 50%{
+  transform:translateY(-60px);
+ }
 
-@keyframes batFly{
-
-    0%{
-        left:-10%;
-        transform:translateY(0) scale(.8);
-    }
-
-    50%{
-        transform:translateY(-50px) scale(1);
-    }
-
-    100%{
-        left:110%;
-        transform:translateY(30px) scale(.8);
-    }
+ 100%{
+  left:110%;
+  transform:translateY(25px);
+ }
 
 }
 
+.fog{
+ position:absolute;
+ width:180%;
+ height:120px;
+ left:-40%;
+ bottom:5%;
 
-/* =========================================================
-   CONTAINER
-========================================================= */
+ border-radius:50%;
 
-.container{
-    width:min(1100px,92%);
-    margin:auto;
+ background:#fff1;
+
+ filter:blur(30px);
+
+ animation:
+ fogMove 12s ease-in-out infinite alternate;
 }
 
+@keyframes fogMove{
+ from{
+  transform:translateX(-8%);
+ }
+ to{
+  transform:translateX(8%);
+ }
+}
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* =========================
+ HEADER
+========================= */
 
 header{
-    min-height:90vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:50px 0;
+ padding:45px 15px 25px;
 }
 
-.hero{
-    width:100%;
-    text-align:center;
+.logo{
+ display:inline-block;
+ font-size:75px;
+
+ filter:
+ drop-shadow(0 0 10px #ff7417)
+ drop-shadow(0 0 30px #ff4500);
+
+ animation:
+ pumpkinFloat 3s ease-in-out infinite;
 }
 
-.badge{
-    display:inline-flex;
+@keyframes pumpkinFloat{
 
-    align-items:center;
-    gap:8px;
-
-    padding:9px 17px;
-
-    border-radius:50px;
-
-    background:#ffffff08;
-
-    border:1px solid #ff741744;
-
-    color:#ffb66d;
-
-    font-size:13px;
-    font-weight:bold;
-
-    letter-spacing:1.5px;
-
-    box-shadow:
-        0 0 25px #ff741710;
-}
-
-.hero-pumpkin{
-    margin:30px 0 12px;
-
-    font-size:100px;
-
-    filter:
-        drop-shadow(0 0 12px #ff7417)
-        drop-shadow(0 0 40px #ff4d0044);
-
-    animation:
-        floating 3s ease-in-out infinite;
-}
-
-@keyframes floating{
-
-    50%{
-        transform:
-            translateY(-12px)
-            rotate(3deg);
-    }
+ 50%{
+  transform:
+  translateY(-8px)
+  rotate(4deg);
+ }
 
 }
 
-.hero h1{
-    font-size:
-        clamp(38px,8vw,75px);
+h1{
+ margin-top:8px;
 
-    line-height:.95;
+ font-size:
+ clamp(27px,7vw,52px);
 
-    font-weight:900;
+ letter-spacing:2px;
 
-    letter-spacing:-3px;
+ color:#ff963e;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffbe72,
-            #ff7417 45%,
-            #a74bd3
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    filter:
-        drop-shadow(0 0 18px #ff5b0030);
+ text-shadow:
+ 0 0 8px #ff5b00,
+ 0 0 25px #ff3500;
 }
 
-.hero h1 span{
-    display:block;
+.subtitle{
+ margin-top:10px;
+
+ color:#cdbbd4;
+
+ font-size:15px;
 }
 
-.hero p{
-    max-width:650px;
-
-    margin:24px auto;
-
-    color:var(--muted);
-
-    line-height:1.7;
-
-    font-size:16px;
-}
-
-.scroll{
-    margin-top:35px;
-
-    color:#ff963e;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    opacity:.75;
-}
-
-
-/* =========================================================
-   MENU
-========================================================= */
+/* =========================
+ MENU
+========================= */
 
 #menu{
-    padding-bottom:70px;
+ width:94%;
+ max-width:1050px;
+
+ margin:auto;
+
+ padding-bottom:60px;
 }
 
-.menu-heading{
-    display:flex;
+.section-title{
+ margin:25px 0;
 
-    justify-content:space-between;
-    align-items:end;
+ font-size:24px;
+ font-weight:bold;
 
-    margin-bottom:22px;
+ color:#fff;
 }
 
-.menu-heading small{
-    color:#a995af;
+.section-title span{
+ color:var(--orange);
 }
 
-.menu-heading h2{
-    font-size:28px;
-
-    color:#fff;
-}
-
-.menu-heading h2 span{
-    color:var(--orange);
-}
-
-
-/* =========================================================
-   CARDS
-========================================================= */
+/* =========================
+ CARDS
+========================= */
 
 .games{
-    display:grid;
+ display:grid;
 
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
+ grid-template-columns:
+ repeat(
+  auto-fit,
+  minmax(280px,1fr)
+ );
 
-    gap:24px;
+ gap:25px;
 }
 
-.game-card{
-    position:relative;
+.card{
+ position:relative;
 
-    overflow:hidden;
+ padding:30px 22px;
 
-    min-height:390px;
+ min-height:420px;
 
-    padding:28px;
+ border-radius:28px;
 
-    border-radius:28px;
+ background:
+ linear-gradient(
+  145deg,
+  #2b1538ee,
+  #100713f5
+ );
 
-    background:
-        linear-gradient(
-            145deg,
-            #2a1535e8,
-            #0e0714f5
-        );
+ border:
+ 1px solid #a24ed455;
 
-    border:
-        1px solid #ffffff10;
+ box-shadow:
+ 0 20px 50px #000b,
+ inset 0 1px #ffffff12;
 
-    box-shadow:
-        0 25px 70px #000b,
-        inset 0 1px #ffffff12;
+ transition:
+ transform .25s,
+ border-color .25s,
+ box-shadow .25s;
 
-    transition:
-        transform .3s,
-        border-color .3s,
-        box-shadow .3s;
+ overflow:hidden;
 }
 
-.game-card:hover{
-    transform:translateY(-7px);
+.card:before{
+ content:"";
 
-    border-color:#ff741766;
+ position:absolute;
 
-    box-shadow:
-        0 30px 80px #000d,
-        0 0 45px #ff741710;
+ width:180px;
+ height:180px;
+
+ top:-90px;
+ right:-70px;
+
+ border-radius:50%;
+
+ background:#ff741715;
+
+ filter:blur(5px);
 }
 
-.game-card:before{
-    content:"";
+.card:hover{
+ transform:translateY(-7px);
 
-    position:absolute;
+ border-color:#ff7417aa;
 
-    width:220px;
-    height:220px;
-
-    right:-100px;
-    top:-100px;
-
-    border-radius:50%;
-
-    background:var(--orange);
-
-    opacity:.08;
-
-    filter:blur(20px);
+ box-shadow:
+ 0 25px 60px #000d,
+ 0 0 30px #ff650020;
 }
 
-.card-top{
-    display:flex;
+.card-icon{
+ position:relative;
 
-    align-items:center;
-    justify-content:space-between;
+ font-size:82px;
+
+ margin:10px 0 20px;
+
+ filter:
+ drop-shadow(0 8px 8px #000);
+
+ animation:
+ iconFloat 3s ease-in-out infinite;
 }
 
-.game-number{
-    color:#ffffff55;
+@keyframes iconFloat{
 
-    font-size:13px;
+ 50%{
+  transform:
+  translateY(-7px)
+  rotate(2deg);
+ }
 
-    letter-spacing:2px;
 }
 
-.game-icon{
-    width:90px;
-    height:90px;
+.card h2{
+ color:#ff963e;
 
-    display:flex;
+ font-size:26px;
 
-    align-items:center;
-    justify-content:center;
-
-    font-size:58px;
-
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff74171c,
-            #8e45c71c
-        );
-
-    border:1px solid #ffffff0d;
-
-    box-shadow:
-        inset 0 1px #ffffff12,
-        0 15px 30px #0008;
-
-    animation:
-        floating 3.5s ease-in-out infinite;
+ margin-bottom:14px;
 }
 
-.game-card h3{
-    margin-top:25px;
+.card p{
+ color:#c1afc7;
 
-    font-size:27px;
+ line-height:1.6;
 
-    color:#ff9a43;
+ min-height:78px;
 }
 
-.game-card p{
-    margin-top:12px;
+/* =========================
+ BOTÃO
+========================= */
 
-    color:#b9aabd;
+.play{
+ position:relative;
 
-    line-height:1.7;
+ width:90%;
 
-    min-height:80px;
+ margin-top:18px;
+
+ padding:16px;
+
+ border:0;
+
+ border-radius:15px;
+
+ color:#fff;
+
+ font-size:17px;
+ font-weight:bold;
+
+ background:
+ linear-gradient(
+  135deg,
+  #ff962b,
+  #e13d00
+ );
+
+ box-shadow:
+ 0 8px 25px #ff4c0035,
+ inset 0 1px #fff5;
+
+ cursor:pointer;
+
+ transition:
+ transform .2s,
+ filter .2s;
 }
 
-.rules{
-    margin-top:20px;
+.play:hover{
+ transform:scale(1.03);
 
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:8px;
+ filter:brightness(1.1);
 }
 
-.rule{
-    padding:10px;
-
-    border-radius:12px;
-
-    background:#ffffff05;
-
-    border:1px solid #ffffff08;
-
-    color:#cfc1d4;
-
-    font-size:12px;
-
-    text-align:left;
+.play:active{
+ transform:scale(.97);
 }
 
-.start{
-    width:100%;
+.help{
+ margin-top:18px;
 
-    margin-top:22px;
+ padding:15px;
 
-    padding:16px;
+ border-radius:15px;
 
-    border:0;
+ background:#05030899;
 
-    border-radius:15px;
+ border:
+ 1px solid #ffffff0b;
 
-    color:white;
+ color:#c7b8cc;
 
-    font-size:16px;
+ font-size:13px;
 
-    font-weight:800;
-
-    letter-spacing:.5px;
-
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff941f,
-            #e44800
-        );
-
-    box-shadow:
-        0 12px 25px #ff550025;
-
-    transition:.2s;
+ line-height:1.8;
 }
 
-.start:hover{
-    transform:translateY(-2px);
+/* =========================
+ RANKING
+========================= */
 
-    box-shadow:
-        0 15px 35px #ff550040;
+#ranking{
+ margin-top:35px;
+
+ padding:28px 15px;
+
+ border-radius:25px;
+
+ background:
+ linear-gradient(
+  145deg,
+  #1d1026ee,
+  #08050bee
+ );
+
+ border:
+ 1px solid #8b4ea455;
+
+ box-shadow:
+ 0 20px 50px #000b;
 }
 
-.start:active{
-    transform:scale(.98);
+#ranking h2{
+ margin-bottom:20px;
+
+ color:#ff9a43;
+
+ text-shadow:
+ 0 0 12px #ff5b0040;
 }
 
-
-/* =========================================================
-   RANKING
-========================================================= */
-
-.ranking{
-    margin-top:25px;
-
-    padding:25px;
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #191021ee,
-            #0b0610ee
-        );
-
-    border:1px solid #ffffff0d;
-
-    box-shadow:
-        0 25px 60px #000a;
-}
-
-.ranking-title{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:18px;
-}
-
-.ranking-title h2{
-    font-size:21px;
-
-    color:#ff9a43;
-}
-
-.ranking-title span{
-    color:#ffffff44;
-
-    font-size:12px;
-}
-
-.rank-list{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
+#rank{
+ width:100%;
 }
 
 .rankrow{
-    display:flex;
+ display:flex;
 
-    align-items:center;
+ justify-content:space-between;
+ align-items:center;
 
-    justify-content:space-between;
+ width:100%;
+ max-width:600px;
 
-    padding:13px 15px;
+ margin:6px auto;
 
-    border-radius:13px;
+ padding:13px 16px;
 
-    background:#ffffff04;
+ border-radius:13px;
 
-    border:1px solid transparent;
-}
+ background:#ffffff05;
 
-.rankrow:first-child{
-    background:
-        linear-gradient(
-            90deg,
-            #ff9d2418,
-            #8e45c710
-        );
-
-    border-color:#ffae3030;
-}
-
-.rank-left{
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-}
-
-.position{
-    width:28px;
-
-    color:#ffffff66;
-
-    font-weight:bold;
+ border-bottom:
+ 1px solid #ffffff0b;
 }
 
 .rank-name{
-    color:#ddd1df;
+ text-align:left;
+
+ color:#eee;
 }
 
 .rank-points{
-    color:#ffad52;
+ color:#ffad52;
 
-    font-weight:bold;
+ font-weight:bold;
 }
 
-
-/* =========================================================
-   GAME SCREEN
-========================================================= */
+/* =========================
+ ÁREA DO JOGO
+========================= */
 
 #game{
-    display:none;
+ display:none;
 
-    min-height:100vh;
+ width:100%;
 
-    padding:
-        35px 0
-        60px;
-}
-
-.game-header{
-    text-align:center;
-
-    margin-bottom:18px;
-}
-
-.game-header .back-mini{
-    display:inline-block;
-
-    margin-bottom:10px;
-
-    color:#a995af;
-
-    font-size:13px;
+ padding:
+ 15px 5px 40px;
 }
 
 #title{
-    color:#ff963e;
+ margin:10px 0 8px;
 
-    font-size:
-        clamp(25px,6vw,36px);
+ color:#ff963e;
 
-    text-shadow:
-        0 0 20px #ff5b0040;
+ font-size:29px;
+
+ text-shadow:
+ 0 0 15px #ff5b00;
 }
 
-.score-box{
-    display:inline-flex;
+.info{
+ display:inline-block;
 
-    align-items:center;
+ margin:8px auto 16px;
 
-    gap:8px;
+ padding:9px 22px;
 
-    margin-top:12px;
+ border-radius:30px;
 
-    padding:9px 18px;
+ background:#110918dd;
 
-    border-radius:50px;
+ border:
+ 1px solid #ff741755;
 
-    background:#110918cc;
+ font-size:21px;
 
-    border:1px solid #ff741744;
-
-    font-size:19px;
-
-    font-weight:bold;
+ font-weight:bold;
 }
 
 #score{
-    color:#ffb052;
+ color:#ffad52;
 }
 
-
-/* =========================================================
-   ARENA
-========================================================= */
+/* =========================
+ ARENA
+========================= */
 
 .arena{
-    position:relative;
+ position:relative;
 
-    width:100%;
+ width:96%;
+ max-width:650px;
 
-    max-width:720px;
+ height:510px;
 
-    height:520px;
+ margin:auto;
 
-    margin:auto;
+ overflow:hidden;
 
-    overflow:hidden;
+ border-radius:27px;
 
-    border-radius:30px;
+ border:
+ 2px solid #ff7417;
 
-    border:2px solid #ff741766;
+ box-shadow:
+ 0 0 35px #ff550025,
+ 0 20px 55px #000c;
 
-    box-shadow:
-        0 30px 80px #000d,
-        0 0 50px #ff550012;
-
-    touch-action:none;
+ touch-action:none;
 }
+
+/* FUNDO ABÓBORAS */
 
 .pumpkin-bg{
-    background:
-        radial-gradient(
-            circle at 75% 12%,
-            #fff7d5 0 37px,
-            transparent 40px
-        ),
-        radial-gradient(
-            circle at 15% 65%,
-            #8e45c722,
-            transparent 35%
-        ),
-        linear-gradient(
-            160deg,
-            #281331,
-            #0c0710 70%,
-            #170a15
-        );
+ background:
+ radial-gradient(
+  circle at 75% 12%,
+  #fff8df 0 37px,
+  transparent 40px
+ ),
+ radial-gradient(
+  circle at 20% 70%,
+  #51245c,
+  transparent 32%
+ ),
+ linear-gradient(
+  160deg,
+  #291331,
+  #0a0610 70%,
+  #170914
+ );
 }
 
+/* FUNDO CASTOR */
+
 .mole-bg{
-    background:
-        radial-gradient(
-            circle at 78% 12%,
-            #fff7d5 0 35px,
-            transparent 38px
-        ),
-        linear-gradient(
-            #11091b 0%,
-            #24132d 39%,
-            #3a281d 40%,
-            #25170f 70%,
-            #0a0604 100%
-        );
+ background:
+ radial-gradient(
+  circle at 75% 12%,
+  #fff8df 0 37px,
+  transparent 40px
+ ),
+ linear-gradient(
+  #10091a 0%,
+  #24132e 42%,
+  #39251a 43%,
+  #21140d 72%,
+  #090604 100%
+ );
 }
 
 .mole-bg:after{
-    content:"🌿     🌿       🌿     🌿";
+ content:"🌿    🌿      🌿    🌿";
 
-    position:absolute;
+ position:absolute;
 
-    bottom:25px;
-    left:0;
+ bottom:25px;
+ left:0;
 
-    width:100%;
+ width:100%;
 
-    font-size:31px;
+ font-size:32px;
 
-    opacity:.4;
+ opacity:.45;
 
-    pointer-events:none;
+ pointer-events:none;
 }
 
 .mist{
-    position:absolute;
+ position:absolute;
 
-    width:180%;
-    height:90px;
+ width:180%;
+ height:100px;
 
-    left:-40%;
-    bottom:45px;
+ left:-40%;
+ bottom:55px;
 
-    background:#ffffff0b;
+ background:#fff1;
 
-    filter:blur(25px);
+ filter:blur(25px);
 
-    animation:
-        mistMove 10s ease-in-out infinite alternate;
+ animation:
+ fogMove 9s ease-in-out infinite alternate;
 
-    pointer-events:none;
+ pointer-events:none;
 }
 
-@keyframes mistMove{
+.tree{
+ position:absolute;
 
-    from{
-        transform:translateX(-8%);
-    }
+ bottom:20px;
 
-    to{
-        transform:translateX(8%);
-    }
+ font-size:110px;
 
+ opacity:.12;
+
+ pointer-events:none;
+}
+
+.t1{
+ left:-20px;
+}
+
+.t2{
+ right:-20px;
 }
 
 .ground{
-    position:absolute;
+ position:absolute;
 
-    left:0;
-    bottom:0;
+ bottom:0;
+ left:0;
 
-    width:100%;
-    height:12px;
+ width:100%;
+ height:15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ff4f00,
-            #ff9b2f,
-            #ff4f00
-        );
+ background:#ff6500;
 
-    box-shadow:
-        0 0 25px #ff6500;
+ box-shadow:
+ 0 0 20px #ff6500;
 
-    z-index:2;
+ z-index:2;
 }
 
-
-/* =========================================================
-   ÁRVORES
-========================================================= */
-
-.tree{
-    position:absolute;
-
-    bottom:12px;
-
-    font-size:105px;
-
-    opacity:.10;
-
-    pointer-events:none;
-}
-
-.tree.left{
-    left:-15px;
-}
-
-.tree.right{
-    right:-15px;
-}
-
-
-/* =========================================================
-   BURACOS
-========================================================= */
-
-.hole{
-    position:absolute;
-
-    width:80px;
-    height:44px;
-
-    border-radius:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        radial-gradient(
-            ellipse,
-            #020101 0 48%,
-            #170d08 68%,
-            transparent 72%
-        );
-
-    border:3px solid #4d3020;
-
-    box-shadow:
-        inset 0 5px 10px #000,
-        0 5px 7px #0008;
-
-    z-index:3;
-}
-
-
-/* =========================================================
-   OBJETOS
-========================================================= */
+/* =========================
+ OBJETOS
+========================= */
 
 .item{
-    position:absolute;
+ position:absolute;
 
-    transform:
-        translate(-50%,-50%);
+ font-size:72px;
 
-    font-size:72px;
+ transform:
+ translate(-50%,-50%);
 
-    z-index:10;
+ user-select:none;
 
-    user-select:none;
+ touch-action:none;
 
-    cursor:pointer;
+ z-index:10;
 
-    touch-action:none;
+ filter:
+ drop-shadow(0 8px 6px #000);
 
-    filter:
-        drop-shadow(0 8px 7px #000);
+ cursor:pointer;
 
-    animation:
-        spawn .18s ease-out;
+ animation:
+ spawnItem .18s ease-out;
 }
 
-@keyframes spawn{
+@keyframes spawnItem{
 
-    from{
-        transform:
-            translate(-50%,-50%)
-            scale(.3);
+ from{
+  transform:
+  translate(-50%,-50%)
+  scale(.3);
 
-        opacity:0;
-    }
+  opacity:0;
+ }
 
-    to{
-        transform:
-            translate(-50%,-50%)
-            scale(1);
+ to{
+  transform:
+  translate(-50%,-50%)
+  scale(1);
 
-        opacity:1;
-    }
+  opacity:1;
+ }
 
 }
 
+/* =========================
+ BURACOS
+========================= */
 
-/* =========================================================
-   CONTAGEM
-========================================================= */
+.hole{
+ position:absolute;
+
+ width:78px;
+ height:43px;
+
+ border-radius:50%;
+
+ background:
+ radial-gradient(
+  ellipse at center,
+  #020101 0 50%,
+  #160d08 70%,
+  transparent 72%
+ );
+
+ border:
+ 3px solid #4d3020;
+
+ box-shadow:
+ inset 0 5px 10px #000,
+ 0 4px 5px #0008;
+
+ transform:
+ translate(-50%,-50%);
+
+ z-index:3;
+}
+
+/* =========================
+ CONTAGEM
+========================= */
 
 #countdown{
-    position:absolute;
+ position:absolute;
 
-    inset:0;
+ inset:0;
 
-    display:none;
+ z-index:40;
 
-    align-items:center;
-    justify-content:center;
+ display:none;
 
-    z-index:40;
+ align-items:center;
+ justify-content:center;
 
-    background:#050208cc;
+ background:#050208bb;
 
-    font-size:
-        clamp(80px,18vw,130px);
+ font-size:100px;
 
-    font-weight:900;
+ font-weight:bold;
 
-    color:#ff8a22;
+ color:#ff8a22;
 
-    text-shadow:
-        0 0 20px #ff5b00,
-        0 0 60px #ff3c00;
+ text-shadow:
+ 0 0 15px #ff5b00,
+ 0 0 50px #ff3c00;
+
+ animation:
+ countPulse .5s;
 }
 
+@keyframes countPulse{
 
-/* =========================================================
-   ACERTO
-========================================================= */
+ from{
+  transform:scale(1.4);
+  opacity:0;
+ }
+
+ to{
+  transform:scale(1);
+  opacity:1;
+ }
+
+}
+
+/* =========================
+ ACERTO
+========================= */
 
 .hit{
-    position:absolute;
+ position:absolute;
 
-    z-index:35;
+ pointer-events:none;
 
-    pointer-events:none;
+ font-size:40px;
 
-    font-size:40px;
+ font-weight:bold;
 
-    font-weight:900;
+ color:#ffb23e;
 
-    color:#ffb23e;
+ text-shadow:
+ 0 0 10px #ff5b00;
 
-    text-shadow:
-        0 0 12px #ff5b00;
+ animation:
+ hitEffect .5s forwards;
 
-    animation:
-        hit .5s forwards;
+ z-index:35;
 }
 
-@keyframes hit{
+@keyframes hitEffect{
 
-    0%{
-        transform:scale(.4);
-        opacity:1;
-    }
+ 0%{
+  transform:scale(.4);
+  opacity:1;
+ }
 
-    100%{
-        transform:
-            scale(1.8)
-            translateY(-45px);
+ 100%{
+  transform:
+  scale(1.8)
+  translateY(-45px);
 
-        opacity:0;
-    }
+  opacity:0;
+ }
 
 }
 
+/* =========================
+ MENSAGEM
+========================= */
 
-/* =========================================================
-   GAME OVER
-========================================================= */
+.message{
+ margin:13px auto;
+
+ color:#cbbbd0;
+
+ font-size:15px;
+}
+
+/* =========================
+ GAME OVER
+========================= */
 
 .gameover{
-    position:absolute;
+ display:none;
 
-    inset:0;
+ position:absolute;
 
-    display:none;
+ inset:0;
 
-    align-items:center;
-    justify-content:center;
+ z-index:50;
 
-    padding:20px;
+ align-items:center;
+ justify-content:center;
 
-    z-index:50;
+ padding:18px;
 
-    background:#050208dd;
+ background:#050208dd;
 
-    backdrop-filter:blur(8px);
+ backdrop-filter:
+ blur(7px);
 }
 
 .gameover-box{
-    width:92%;
-    max-width:390px;
+ width:92%;
+ max-width:370px;
 
-    padding:30px 20px;
+ padding:30px 18px;
 
-    border-radius:25px;
+ border-radius:25px;
 
-    text-align:center;
+ background:
+ linear-gradient(
+  145deg,
+  #2b1433,
+  #0d0710
+ );
 
-    background:
-        linear-gradient(
-            145deg,
-            #2b1433,
-            #0d0710
-        );
+ border:
+ 1px solid #ff7417aa;
 
-    border:1px solid #ff741766;
+ box-shadow:
+ 0 20px 60px #000,
+ 0 0 35px #ff5b0020;
 
-    box-shadow:
-        0 30px 80px #000,
-        0 0 40px #ff5b0018;
-
-    animation:
-        gameoverIn .35s ease-out;
+ animation:
+ gameoverIn .35s ease-out;
 }
 
 @keyframes gameoverIn{
 
-    from{
-        transform:
-            scale(.8)
-            translateY(20px);
+ from{
+  transform:
+  scale(.8)
+  translateY(20px);
 
-        opacity:0;
-    }
+  opacity:0;
+ }
 
-    to{
-        transform:
-            scale(1);
+ to{
+  transform:scale(1);
 
-        opacity:1;
-    }
+  opacity:1;
+ }
 
 }
 
 .gameover-box h2{
-    color:#ff7d20;
+ color:#ff7d20;
 
-    font-size:26px;
+ text-shadow:
+ 0 0 15px #ff4d00;
 
-    text-shadow:
-        0 0 15px #ff4d00;
-}
-
-.gameover-box p{
-    color:#b9aabd;
-
-    margin-top:10px;
-
-    line-height:1.5;
+ margin-bottom:8px;
 }
 
 .final{
-    margin:8px;
+ font-size:40px;
 
-    font-size:50px;
+ color:#ffb052;
 
-    font-weight:900;
-
-    color:#ffb052;
+ margin:9px;
 }
 
 .gameover-box input{
-    width:90%;
+ width:90%;
 
-    margin-top:18px;
+ padding:14px;
 
-    padding:14px;
+ border:
+ 1px solid #ffffff18;
 
-    border-radius:13px;
+ border-radius:12px;
 
-    border:1px solid #ffffff15;
+ background:#050308;
 
-    outline:none;
+ color:#fff;
 
-    background:#050308;
+ outline:none;
 
-    color:white;
+ font-size:16px;
 
-    font-size:16px;
+ text-align:center;
 
-    text-align:center;
+ margin-top:8px;
 }
 
 .gameover-box input:focus{
-    border-color:#ff7417;
+ border-color:#ff7417;
 
-    box-shadow:
-        0 0 15px #ff5b0030;
+ box-shadow:
+ 0 0 15px #ff5b0030;
+}
+
+.save,
+.back{
+ width:90%;
+
+ margin-top:14px;
+
+ padding:15px;
+
+ border-radius:13px;
+
+ color:#fff;
+
+ font-size:16px;
+
+ font-weight:bold;
+
+ cursor:pointer;
 }
 
 .save{
-    width:90%;
+ border:
+ 1px solid #ffb35a55;
 
-    margin-top:12px;
-
-    padding:14px;
-
-    border:0;
-
-    border-radius:13px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff941f,
-            #d84300
-        );
-
-    font-weight:bold;
-
-    font-size:15px;
-
-    cursor:pointer;
+ background:
+ linear-gradient(
+  135deg,
+  #ff8b20,
+  #d43800
+ );
 }
-
-
-/* =========================================================
-   BOTÃO VOLTAR
-========================================================= */
 
 .back{
-    display:block;
+ background:#241b29;
 
-    width:min(400px,90%);
-
-    margin:20px auto 0;
-
-    padding:14px;
-
-    border-radius:13px;
-
-    border:1px solid #ffffff12;
-
-    background:#241b29;
-
-    color:#ddd;
-
-    cursor:pointer;
-
-    font-weight:bold;
+ border:
+ 1px solid #ffffff15;
 }
 
-.back:hover{
-    background:#302337;
+.save:active,
+.back:active{
+ transform:scale(.97);
 }
 
+/* =========================
+ RESPONSIVO
+========================= */
 
-/* =========================================================
-   RESPONSIVO
-========================================================= */
+@media(max-width:600px){
 
-@media(max-width:700px){
+ header{
+  padding-top:25px;
+ }
 
-    header{
-        min-height:82vh;
-    }
+ .logo{
+  font-size:60px;
+ }
 
-    .hero-pumpkin{
-        font-size:75px;
-    }
+ .subtitle{
+  font-size:13px;
+ }
 
-    .hero h1{
-        letter-spacing:-2px;
-    }
+ .games{
+  grid-template-columns:1fr;
+ }
 
-    .games{
-        grid-template-columns:1fr;
-    }
+ .card{
+  min-height:auto;
+ }
 
-    .game-card{
-        min-height:auto;
-    }
+ .arena{
+  height:480px;
+ }
 
-    .rules{
-        grid-template-columns:1fr;
-    }
+ .item{
+  font-size:68px;
+ }
 
-    .arena{
-        height:480px;
+ .hole{
+  width:65px;
+  height:37px;
+ }
 
-        border-radius:22px;
-    }
-
-    .item{
-        font-size:66px;
-    }
-
-    .hole{
-        width:65px;
-        height:37px;
-    }
-
-    .tree{
-        font-size:80px;
-    }
-
-    .moon{
-        width:75px;
-        height:75px;
-    }
-
-}
-
-@media(max-width:420px){
-
-    .container{
-        width:94%;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .game-card{
-        padding:22px;
-    }
-
-    .game-icon{
-        width:75px;
-        height:75px;
-        font-size:48px;
-    }
-
-    .arena{
-        height:460px;
-    }
+ #countdown{
+  font-size:80px;
+ }
 
 }
 
@@ -1335,371 +1056,222 @@ header{
 
 <body>
 
-
-<!-- =========================================================
-   FUNDO
-========================================================= -->
-
 <div class="background">
 
-    <div class="stars"></div>
+ <div class="moon"></div>
 
-    <div class="moon"></div>
+ <div class="fog"></div>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
+ <div class="bat" style="top:18%;animation-delay:0s">🦇</div>
+ <div class="bat" style="top:32%;animation-delay:5s">🦇</div>
+ <div class="bat" style="top:12%;animation-delay:8s">🦇</div>
 
-    <div class="bat b1">🦇</div>
-    <div class="bat b2">🦇</div>
-    <div class="bat b3">🦇</div>
+ <div class="star" style="left:10%;top:15%"></div>
+ <div class="star" style="left:20%;top:25%"></div>
+ <div class="star" style="left:35%;top:10%"></div>
+ <div class="star" style="left:45%;top:30%"></div>
+ <div class="star" style="left:60%;top:18%"></div>
+ <div class="star" style="left:82%;top:25%"></div>
+ <div class="star" style="left:90%;top:42%"></div>
 
 </div>
-
-
-<!-- =========================================================
-   MENU
-========================================================= -->
-
-<div id="menu">
 
 <header>
 
-    <div class="container">
+ <div class="logo">🎃</div>
 
-        <div class="hero">
+ <h1>
+  HALLOWEEN NA NEXUS COMMUNITY
+ </h1>
 
-            <div class="badge">
-                🎃 NEXUS COMMUNITY • HALLOWEEN EVENT
-            </div>
-
-            <div class="hero-pumpkin">
-                🎃
-            </div>
-
-            <h1>
-                HALLOWEEN
-                <span>NA NEXUS</span>
-            </h1>
-
-            <p>
-                Entre no portal, escolha seu desafio e tente
-                conquistar o topo do Ranking dos Pesadelos.
-            </p>
-
-            <div class="scroll">
-                ↓ ESCOLHA SEU DESAFIO ↓
-            </div>
-
-        </div>
-
-    </div>
+ <div class="subtitle">
+  👻 Portal de jogos • 🏆 Ranking • 🎃 Halloween
+ </div>
 
 </header>
 
-
-<main class="container">
-
-    <div class="menu-heading">
-
-        <div>
-            <h2>
-                <span>02</span> DESAFIOS
-            </h2>
-        </div>
-
-        <small>
-            Escolha seu pesadelo...
-        </small>
-
-    </div>
-
-
-    <!-- =========================
-     JOGOS
-========================= -->
-
 <div id="menu">
 
-  <div class="section-title">
-    🎮 <span>ESCOLHA SEU JOGO</span>
-  </div>
+ <div class="section-title">
+  🎮 <span>ESCOLHA SEU JOGO</span>
+ </div>
 
-  <div class="games">
+ <div class="games">
 
-    <!-- PEGA ABÓBORAS -->
+  <div class="card">
 
-    <div class="card">
+   <div class="card-icon">
+    🎃
+   </div>
 
-      <div class="card-icon">🎃</div>
+   <h2>
+    PEGA ABÓBORAS
+   </h2>
 
-      <h2>PEGA ABÓBORAS</h2>
+   <p>
+    As abóboras estão caindo!
+    Pegue o máximo que conseguir
+    antes que uma toque o chão.
+   </p>
 
-      <p>
-        As abóboras estão caindo!
-        Pegue o máximo que conseguir
-        antes que uma toque o chão.
-      </p>
+   <button
+    type="button"
+    class="play"
+    onclick="openGame('pump')"
+   >
+    ▶ COMEÇAR JOGO
+   </button>
 
-      <button class="play" onclick="openGame('pump')">
-        ▶ COMEÇAR JOGO
-      </button>
+   <div class="help">
 
-      <div class="help">
-        🎃 +1 ponto<br>
-        💣 Clique na bomba = Game Over<br>
-        ⚠️ Abóbora no chão = Game Over
-      </div>
+    🎃 Abóbora = +1 ponto<br>
+    💣 Bomba no chão não importa<br>
+    💥 Clique na bomba = Game Over<br>
+    ⚠️ Abóbora no chão = Game Over
 
-    </div>
-
-
-    <!-- BATER NO CASTOR -->
-
-    <div class="card">
-
-      <div class="card-icon">🔨</div>
-
-      <h2>BATER NO CASTOR</h2>
-
-      <p>
-        Os castores aparecem nos buracos.
-        Seja rápido e acerte o máximo
-        possível!
-      </p>
-
-      <button class="play" onclick="openGame('mole')">
-        ▶ COMEÇAR JOGO
-      </button>
-
-      <div class="help">
-        🦫 +1 ponto<br>
-        💣 Bomba = Game Over<br>
-        🕳️ 7 buracos diferentes<br>
-        ⚡ A velocidade aumenta
-      </div>
-
-    </div>
+   </div>
 
   </div>
 
+  <div class="card">
 
-  <!-- =========================
-       RANKING
-  ========================= -->
+   <div class="card-icon">
+    🔨
+   </div>
 
-  <div id="ranking">
+   <h2>
+    BATER NO CASTOR
+   </h2>
 
-    <h2>🏆 RANKING DOS PESADELOS</h2>
+   <p>
+    Os castores estão escondidos
+    nos buracos. Seja rápido e
+    acerte-os antes que desapareçam!
+   </p>
 
-    <div id="rank"></div>
+   <button
+    type="button"
+    class="play"
+    onclick="openGame('mole')"
+   >
+    ▶ COMEÇAR JOGO
+   </button>
+
+   <div class="help">
+
+    🦫 Castor = +1 ponto<br>
+    💣 Bomba = Game Over<br>
+    🕳️ 7 buracos diferentes<br>
+    ⚡ A velocidade aumenta
+
+   </div>
 
   </div>
+
+ </div>
+
+ <div id="ranking">
+
+  <h2>
+   🏆 RANKING DOS PESADELOS
+  </h2>
+
+  <div id="rank"></div>
+
+ </div>
 
 </div>
-
-
-<!-- =========================
-     ÁREA DOS JOGOS
-========================= -->
-
-<div id="game">
-
-  <h2 id="title"></h2>
-
-  <div class="info">
-    🏆 <span id="score">0</span>
-  </div>
-
-
-  <div class="arena" id="arena">
-
-    <!-- CONTAGEM -->
-
-    <div id="countdown"></div>
-
-
-    <!-- EFEITOS -->
-
-    <div class="mist"></div>
-
-    <div class="tree t1">🌲</div>
-    <div class="tree t2">🌲</div>
-
-
-    <!-- 7 BURACOS DO CASTOR -->
-
-    <div class="hole" id="h1"></div>
-    <div class="hole" id="h2"></div>
-    <div class="hole" id="h3"></div>
-    <div class="hole" id="h4"></div>
-    <div class="hole" id="h5"></div>
-    <div class="hole" id="h6"></div>
-    <div class="hole" id="h7"></div>
-
-
-    <!-- CHÃO -->
-
-    <div class="ground"></div>
-
-
-    <!-- =========================
-         GAME OVER
-    ========================= -->
-
-    <div class="gameover" id="gameover">
-
-      <div class="gameover-box">
-
-        <h2>💀 GAME OVER</h2>
-
-        <p>Sua pontuação</p>
-
-        <div class="final" id="finalScore">
-          0
-        </div>
-
-        <p>
-          Digite seu nome para entrar
-          no ranking:
-        </p>
-
-        <input
-          id="playerName"
-          maxlength="18"
-          placeholder="Seu nome"
-          autocomplete="off"
-        >
-
-        <br><br>
-
-        <button
-          class="play save"
-          onclick="saveScore()"
-        >
-          🏆 SALVAR PONTUAÇÃO
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="message" id="message">
-    Prepare-se...
-  </div>
-
-
-  <button
-    class="play back"
-    onclick="back()"
-  >
-    ⬅ VOLTAR AO MENU
-  </button>
-
-</div>
-
-
-<!-- =========================
-     SCRIPT DOS JOGOS
-========================= -->
-
+   
 <script>
 
-let type = '';
+let gameType = "";
 let score = 0;
-let running = false;
+let playing = false;
 
 let objects = [];
-
-let lastTime = 0;
-let lastSpawn = 0;
+let animationFrame = null;
 
 let startTime = 0;
-
+let lastSpawn = 0;
 let spawnDelay = 900;
 
 let moleTimer = null;
-let countTimer = null;
+let countdownTimer = null;
 
-const arena = document.getElementById('arena');
+const arena = document.getElementById("arena");
 
-let audio = null;
+let audioContext = null;
 
 
 /* =========================
-   SOM
+   ÁUDIO
 ========================= */
 
 function getAudio(){
 
-  if(!audio){
+    if(!audioContext){
 
-    const AC =
-      window.AudioContext ||
-      window.webkitAudioContext;
+        const AudioCtx =
+            window.AudioContext ||
+            window.webkitAudioContext;
 
-    if(!AC) return null;
+        if(!AudioCtx) return null;
 
-    audio = new AC();
+        audioContext = new AudioCtx();
 
-  }
+    }
 
-  if(audio.state === 'suspended'){
-    audio.resume();
-  }
+    if(audioContext.state === "suspended"){
+        audioContext.resume();
+    }
 
-  return audio;
-
+    return audioContext;
 }
 
 
-function sound(
-  frequency,
-  duration = .1,
-  wave = 'sine'
+function playSound(
+    frequency,
+    duration = 0.1,
+    type = "sine"
 ){
 
-  try{
+    try{
 
-    const a = getAudio();
+        const audio = getAudio();
 
-    if(!a) return;
+        if(!audio) return;
 
-    const oscillator =
-      a.createOscillator();
+        const oscillator =
+            audio.createOscillator();
 
-    const gain =
-      a.createGain();
+        const gain =
+            audio.createGain();
 
-    oscillator.type = wave;
+        oscillator.type = type;
 
-    oscillator.frequency.value =
-      frequency;
+        oscillator.frequency.value =
+            frequency;
 
-    gain.gain.setValueAtTime(
-      .07,
-      a.currentTime
-    );
+        gain.gain.setValueAtTime(
+            0.07,
+            audio.currentTime
+        );
 
-    gain.gain.exponentialRampToValueAtTime(
-      .001,
-      a.currentTime + duration
-    );
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audio.currentTime + duration
+        );
 
-    oscillator.connect(gain);
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
 
-    gain.connect(a.destination);
+        oscillator.start();
 
-    oscillator.start();
+        oscillator.stop(
+            audio.currentTime + duration
+        );
 
-    oscillator.stop(
-      a.currentTime + duration
-    );
-
-  }catch(e){}
+    }catch(error){}
 
 }
 
@@ -1708,111 +1280,104 @@ function sound(
    ABRIR JOGO
 ========================= */
 
-function openGame(gameType){
+function openGame(type){
 
-  stopGame();
+    stopGame();
 
-  type = gameType;
+    gameType = type;
 
-  document.getElementById('menu')
-    .style.display = 'none';
+    document.getElementById("menu")
+        .style.display = "none";
 
-  const header =
-    document.querySelector('header');
+    const header =
+        document.querySelector("header");
 
-  if(header){
-    header.style.display = 'none';
-  }
+    if(header){
+        header.style.display = "none";
+    }
 
-  document.getElementById('game')
-    .style.display = 'block';
+    document.getElementById("game")
+        .style.display = "block";
 
+    document.getElementById("gameover")
+        .style.display = "none";
 
-  document.getElementById('title')
-    .textContent =
-      type === 'pump'
-      ? '🎃 PEGA ABÓBORAS'
-      : '🔨 BATER NO CASTOR';
+    document.getElementById("title")
+        .textContent =
+        type === "pump"
+        ? "🎃 PEGA ABÓBORAS"
+        : "🔨 BATER NO CASTOR";
 
+    arena.className =
+        "arena " +
+        (
+            type === "pump"
+            ? "pumpkin-bg"
+            : "mole-bg"
+        );
 
-  arena.className =
-    'arena ' +
-    (
-      type === 'pump'
-      ? 'pumpkin-bg'
-      : 'mole-bg'
-    );
+    score = 0;
 
+    document.getElementById("score")
+        .textContent = "0";
 
-  document.getElementById('gameover')
-    .style.display = 'none';
+    document.getElementById("message")
+        .textContent =
+        type === "pump"
+        ? "Pegue as abóboras! 🎃"
+        : "Acerte os castores! 🦫";
 
+    arena
+        .querySelectorAll(".item")
+        .forEach(item => item.remove());
 
-  document.getElementById('score')
-    .textContent = '0';
+    if(type === "mole"){
+        setupHoles();
+    }
 
-
-  document.getElementById('message')
-    .textContent =
-      type === 'pump'
-      ? 'Pegue as abóboras! 🎃'
-      : 'Acerte os castores! 🦫';
-
-
-  arena
-    .querySelectorAll('.item')
-    .forEach(
-      element => element.remove()
-    );
-
-
-  if(type === 'mole'){
-    setupHoles();
-  }
-
-
-  countdown();
+    countdown();
 
 }
 
 
 /* =========================
-   POSIÇÃO DOS BURACOS
+   BURACOS
 ========================= */
 
 function setupHoles(){
 
-  const positions = [
+    const positions = [
 
-    [15,25],
-    [50,20],
-    [85,27],
-    [25,48],
-    [70,48],
-    [15,75],
-    [50,78]
+        [15,25],
+        [50,20],
+        [85,27],
+        [25,48],
+        [70,48],
+        [15,75],
+        [50,78]
 
-  ];
+    ];
 
+    positions.forEach(
+        (position,index)=>{
 
-  positions.forEach(
-    (position,index)=>{
+            const hole =
+                document.getElementById(
+                    "h" + (index + 1)
+                );
 
-      const hole =
-        document.getElementById(
-          'h' + (index + 1)
-        );
+            if(!hole) return;
 
-      hole.style.left =
-        position[0] + '%';
+            hole.style.left =
+                position[0] + "%";
 
-      hole.style.top =
-        position[1] + '%';
+            hole.style.top =
+                position[1] + "%";
 
-      hole.innerHTML = '';
+            hole.innerHTML = "";
 
-    }
-  );
+        }
+    );
 
 }
 
@@ -1823,107 +1388,102 @@ function setupHoles(){
 
 function countdown(){
 
-  clearInterval(countTimer);
+    clearInterval(countdownTimer);
 
-  const box =
-    document.getElementById(
-      'countdown'
-    );
+    const box =
+        document.getElementById("countdown");
 
-  box.style.display = 'flex';
+    box.style.display = "flex";
 
-  const numbers = [
-    '3',
-    '2',
-    '1',
-    'GO!'
-  ];
+    const numbers = [
+        "3",
+        "2",
+        "1",
+        "GO!"
+    ];
 
-  let index = 0;
+    let index = 0;
 
-  box.textContent =
-    numbers[index];
+    box.textContent =
+        numbers[index];
 
-  sound(400,.12);
+    playSound(400,.12);
 
+    countdownTimer =
+        setInterval(()=>{
 
-  countTimer =
-    setInterval(()=>{
+            index++;
 
-      index++;
+            if(index >= numbers.length){
 
+                clearInterval(
+                    countdownTimer
+                );
 
-      if(index < numbers.length){
+                box.style.display = "none";
 
-        box.textContent =
-          numbers[index];
+                playSound(
+                    900,
+                    .2,
+                    "square"
+                );
 
-        sound(
-          index === 3
-          ? 900
-          : 400,
-          .12
-        );
+                startGame();
 
-      }else{
+                return;
 
-        clearInterval(countTimer);
+            }
 
-        box.style.display =
-          'none';
+            box.textContent =
+                numbers[index];
 
-        startGame();
+            playSound(
+                index === 3
+                ? 900
+                : 400,
+                .12
+            );
 
-      }
-
-    },650);
+        },650);
 
 }
 
 
 /* =========================
-   COMEÇAR
+   INICIAR
 ========================= */
 
 function startGame(){
 
-  stopGame(false);
+    stopGame(false);
 
-  running = true;
+    playing = true;
 
-  objects = [];
+    objects = [];
 
-  score = 0;
+    score = 0;
 
-  startTime =
-    performance.now();
+    startTime =
+        performance.now();
 
-  lastTime =
-    startTime;
+    lastSpawn =
+        startTime;
 
-  lastSpawn =
-    startTime;
+    spawnDelay = 900;
 
-  spawnDelay = 900;
+    document.getElementById("score")
+        .textContent = "0";
 
+    arena
+        .querySelectorAll(".item")
+        .forEach(item => item.remove());
 
-  document.getElementById('score')
-    .textContent = '0';
+    if(gameType === "mole"){
+        spawnMole();
+    }
 
-
-  arena
-    .querySelectorAll('.item')
-    .forEach(
-      element => element.remove()
-    );
-
-
-  if(type === 'mole'){
-    spawnMole();
-  }
-
-
-  requestAnimationFrame(loop);
+    animationFrame =
+        requestAnimationFrame(gameLoop);
 
 }
 
@@ -1932,103 +1492,100 @@ function startGame(){
    LOOP PRINCIPAL
 ========================= */
 
-function loop(time){
+function gameLoop(time){
 
-  if(!running) return;
+    if(!playing) return;
 
+    const elapsed =
+        (time - startTime) / 1000;
 
-  const dt =
-    Math.min(
-      (time - lastTime) / 1000,
-      .05
-    );
+    if(gameType === "pump"){
 
+        spawnDelay =
+            Math.max(
+                300,
+                900 - elapsed * 20
+            );
 
-  lastTime = time;
+        if(
+            time - lastSpawn >=
+            spawnDelay
+        ){
 
+            spawnPumpkin();
 
-  const elapsed =
-    (time - startTime) / 1000;
-
-
-  if(type === 'pump'){
-
-    spawnDelay =
-      Math.max(
-        300,
-        900 - elapsed * 20
-      );
-
-
-    if(
-      time - lastSpawn >=
-      spawnDelay
-    ){
-
-      spawnPump();
-
-      lastSpawn = time;
-
-    }
-
-
-    for(
-      let i = objects.length - 1;
-      i >= 0;
-      i--
-    ){
-
-      const object =
-        objects[i];
-
-
-      if(
-        !object.el ||
-        !object.el.parentNode
-      ){
-
-        objects.splice(i,1);
-
-        continue;
-
-      }
-
-
-      object.y +=
-        object.speed * dt;
-
-
-      object.el.style.top =
-        object.y + 'px';
-
-
-      if(
-        object.y >=
-        arena.clientHeight - 30
-      ){
-
-        if(!object.bomb){
-
-          lose(
-            'Uma abóbora tocou o chão!'
-          );
-
-          return;
-
-        }else{
-
-          removeObject(object);
+            lastSpawn = time;
 
         }
 
-      }
+
+        for(
+            let i = objects.length - 1;
+            i >= 0;
+            i--
+        ){
+
+            const object =
+                objects[i];
+
+            if(
+                !object.el ||
+                !object.el.parentNode
+            ){
+
+                objects.splice(i,1);
+
+                continue;
+
+            }
+
+            const delta =
+                Math.min(
+                    (time - (
+                        object.lastTime ||
+                        time
+                    )) / 1000,
+                    .05
+                );
+
+            object.lastTime = time;
+
+            object.y +=
+                object.speed * delta;
+
+            object.el.style.top =
+                object.y + "px";
+
+
+            if(
+                object.y >=
+                arena.clientHeight - 30
+            ){
+
+                if(!object.bomb){
+
+                    loseGame(
+                        "Uma abóbora tocou o chão!"
+                    );
+
+                    return;
+
+                }else{
+
+                    removeObject(object);
+
+                }
+
+            }
+
+        }
 
     }
 
-  }
-
-
-  requestAnimationFrame(loop);
+    animationFrame =
+        requestAnimationFrame(
+            gameLoop
+        );
 
 }
 
@@ -2037,135 +1594,128 @@ function loop(time){
    CRIAR ABÓBORA
 ========================= */
 
-function spawnPump(){
+function spawnPumpkin(){
 
-  if(!running) return;
+    if(!playing) return;
+
+    const element =
+        document.createElement("div");
+
+    element.className = "item";
+
+    const bomb =
+        Math.random() < 0.18;
+
+    element.textContent =
+        bomb
+        ? "💣"
+        : "🎃";
+
+    const width =
+        arena.clientWidth;
+
+    const x =
+        Math.max(
+            42,
+            Math.min(
+                width - 42,
+                45 +
+                Math.random() *
+                (width - 90)
+            )
+        );
+
+    const y = -45;
+
+    const elapsed =
+        (
+            performance.now() -
+            startTime
+        ) / 1000;
+
+    const speed =
+        105 +
+        Math.random() * 90 +
+        elapsed * 3.5;
+
+    element.style.left =
+        x + "px";
+
+    element.style.top =
+        y + "px";
+
+    arena.appendChild(element);
 
 
-  const element =
-    document.createElement('div');
+    const object = {
 
-  element.className = 'item';
+        el: element,
 
+        x: x,
 
-  const bomb =
-    Math.random() < .18;
+        y: y,
 
+        speed: speed,
 
-  element.textContent =
-    bomb
-    ? '💣'
-    : '🎃';
+        bomb: bomb,
 
+        lastTime: performance.now()
 
-  const width =
-    arena.clientWidth;
+    };
 
 
-  const x =
-    Math.max(
-      42,
-      Math.min(
-        width - 42,
-        45 +
-        Math.random() *
-        (width - 90)
-      )
+    objects.push(object);
+
+
+    element.addEventListener(
+        "pointerdown",
+        event => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if(!playing) return;
+
+
+            if(bomb){
+
+                playSound(
+                    80,
+                    .3,
+                    "sawtooth"
+                );
+
+                loseGame(
+                    "Você clicou na bomba!"
+                );
+
+                return;
+
+            }
+
+
+            score++;
+
+            document.getElementById(
+                "score"
+            ).textContent = score;
+
+            hitEffect(
+                x,
+                y,
+                "+1"
+            );
+
+            playSound(
+                650,
+                .08,
+                "square"
+            );
+
+            removeObject(object);
+
+        }
     );
-
-
-  const y = -45;
-
-
-  const elapsed =
-    (
-      performance.now() -
-      startTime
-    ) / 1000;
-
-
-  const speed =
-    105 +
-    Math.random() * 90 +
-    elapsed * 3.5;
-
-
-  element.style.left =
-    x + 'px';
-
-  element.style.top =
-    y + 'px';
-
-
-  arena.appendChild(element);
-
-
-  const object = {
-
-    el: element,
-    x: x,
-    y: y,
-    speed: speed,
-    bomb: bomb
-
-  };
-
-
-  objects.push(object);
-
-
-  element.addEventListener(
-    'pointerdown',
-    event => {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-
-      if(!running) return;
-
-
-      if(bomb){
-
-        sound(
-          80,
-          .3,
-          'sawtooth'
-        );
-
-        lose(
-          'Você clicou na bomba!'
-        );
-
-      }else{
-
-        score++;
-
-
-        document.getElementById('score')
-          .textContent = score;
-
-
-        hitEffect(
-          x,
-          y,
-          '+1'
-        );
-
-
-        sound(
-          650,
-          .08,
-          'square'
-        );
-
-
-        removeObject(object);
-
-      }
-
-    }
-  );
 
 }
 
@@ -2176,191 +1726,200 @@ function spawnPump(){
 
 function spawnMole(){
 
-  if(
-    !running ||
-    type !== 'mole'
-  ) return;
+    if(
+        !playing ||
+        gameType !== "mole"
+    ) return;
 
-
-  document
-    .querySelectorAll('.moleTarget')
-    .forEach(
-      element => element.remove()
-    );
-
-
-  const id =
-    1 +
-    Math.floor(
-      Math.random() * 7
-    );
-
-
-  const hole =
-    document.getElementById(
-      'h' + id
-    );
-
-
-  const element =
-    document.createElement('div');
-
-
-  element.className =
-    'item moleTarget';
-
-
-  const bomb =
-    Math.random() < .16;
-
-
-  element.textContent =
-    bomb
-    ? '💣'
-    : '🦫';
-
-
-  element.style.fontSize =
-    innerWidth < 600
-    ? '55px'
-    : '62px';
-
-
-  hole.appendChild(element);
-
-
-  let hit = false;
-
-
-  const life =
-    Math.max(
-      380,
-      1000 - score * 18
-    );
-
-
-  element.addEventListener(
-    'pointerdown',
-    event => {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-
-      if(
-        !running ||
-        hit
-      ) return;
-
-
-      hit = true;
-
-
-      if(bomb){
-
-        sound(
-          80,
-          .3,
-          'sawtooth'
+    document
+        .querySelectorAll(".moleTarget")
+        .forEach(
+            item => item.remove()
         );
 
-        lose(
-          'Você acertou uma bomba!'
+
+    const holeNumber =
+        1 +
+        Math.floor(
+            Math.random() * 7
         );
 
-        return;
-
-      }
-
-
-      score++;
-
-
-      document.getElementById('score')
-        .textContent = score;
-
-
-      hitEffect(
-        hole.offsetLeft,
-        hole.offsetTop,
-        '+1'
-      );
-
-
-      sound(
-        700,
-        .08,
-        'square'
-      );
-
-
-      element.remove();
-
-
-      clearTimeout(moleTimer);
-
-
-      moleTimer =
-        setTimeout(
-          spawnMole,
-          Math.max(
-            280,
-            850 - score * 12
-          )
+    const hole =
+        document.getElementById(
+            "h" + holeNumber
         );
 
-    }
-  );
+    if(!hole) return;
 
 
-  moleTimer =
-    setTimeout(()=>{
+    const element =
+        document.createElement("div");
 
-      if(element.parentNode){
-        element.remove();
-      }
+    element.className =
+        "item moleTarget";
 
 
-      if(running){
-        spawnMole();
-      }
+    const bomb =
+        Math.random() < 0.16;
 
-    },life);
+    element.textContent =
+        bomb
+        ? "💣"
+        : "🦫";
+
+
+    element.style.fontSize =
+        window.innerWidth < 600
+        ? "55px"
+        : "62px";
+
+
+    element.style.left = "50%";
+    element.style.top = "50%";
+
+    hole.appendChild(element);
+
+
+    let clicked = false;
+
+
+    const life =
+        Math.max(
+            380,
+            1000 - score * 18
+        );
+
+
+    element.addEventListener(
+        "pointerdown",
+        event => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if(
+                !playing ||
+                clicked
+            ) return;
+
+            clicked = true;
+
+
+            if(bomb){
+
+                playSound(
+                    80,
+                    .3,
+                    "sawtooth"
+                );
+
+                loseGame(
+                    "Você acertou uma bomba!"
+                );
+
+                return;
+
+            }
+
+
+            score++;
+
+            document.getElementById(
+                "score"
+            ).textContent =
+                score;
+
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const arenaRect =
+                arena.getBoundingClientRect();
+
+
+            hitEffect(
+
+                rect.left -
+                arenaRect.left +
+                rect.width / 2,
+
+                rect.top -
+                arenaRect.top,
+
+                "+1"
+
+            );
+
+
+            playSound(
+                700,
+                .08,
+                "square"
+            );
+
+
+            element.remove();
+
+            clearTimeout(
+                moleTimer
+            );
+
+
+            moleTimer =
+                setTimeout(
+                    spawnMole,
+                    Math.max(
+                        280,
+                        850 - score * 12
+                    )
+                );
+
+        }
+    );
+
+
+    moleTimer =
+        setTimeout(()=>{
+
+            if(element.parentNode){
+                element.remove();
+            }
+
+            if(playing){
+                spawnMole();
+            }
+
+        },life);
 
 }
 
 
 /* =========================
-   EFEITO +1
+   EFEITO DE ACERTO
 ========================= */
 
-function hitEffect(
-  x,
-  y,
-  text
-){
+function hitEffect(x,y,text){
 
-  const element =
-    document.createElement('div');
+    const effect =
+        document.createElement("div");
 
-  element.className = 'hit';
+    effect.className = "hit";
 
-  element.textContent = text;
+    effect.textContent = text;
 
-  element.style.left =
-    x + 'px';
+    effect.style.left =
+        x + "px";
 
-  element.style.top =
-    y + 'px';
+    effect.style.top =
+        y + "px";
+
+    arena.appendChild(effect);
 
 
-  arena.appendChild(element);
-
-
-  setTimeout(
-    ()=>element.remove(),
-    500
-  );
+    setTimeout(
+        ()=>effect.remove(),
+        500
+    );
 
 }
 
@@ -2371,28 +1930,27 @@ function hitEffect(
 
 function removeObject(object){
 
-  if(
-    object.el &&
-    object.el.parentNode
-  ){
+    if(
+        object.el &&
+        object.el.parentNode
+    ){
 
-    object.el.remove();
+        object.el.remove();
 
-  }
-
-
-  const index =
-    objects.indexOf(object);
+    }
 
 
-  if(index >= 0){
+    const index =
+        objects.indexOf(object);
 
-    objects.splice(
-      index,
-      1
-    );
+    if(index >= 0){
 
-  }
+        objects.splice(
+            index,
+            1
+        );
+
+    }
 
 }
 
@@ -2401,38 +1959,47 @@ function removeObject(object){
    GAME OVER
 ========================= */
 
-function lose(reason){
+function loseGame(reason){
 
-  if(!running) return;
+    if(!playing) return;
 
+    playing = false;
 
-  running = false;
+    clearTimeout(moleTimer);
+    clearInterval(countdownTimer);
 
+    if(animationFrame){
 
-  clearInterval(countTimer);
-  clearTimeout(moleTimer);
+        cancelAnimationFrame(
+            animationFrame
+        );
 
-
-  document.getElementById(
-    'finalScore'
-  ).textContent = score;
-
-
-  document.getElementById(
-    'gameover'
-  ).style.display = 'flex';
+    }
 
 
-  document.getElementById(
-    'message'
-  ).textContent = reason;
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        score;
 
 
-  sound(
-    120,
-    .35,
-    'sawtooth'
-  );
+    document.getElementById(
+        "gameover"
+    ).style.display =
+        "flex";
+
+
+    document.getElementById(
+        "message"
+    ).textContent =
+        reason;
+
+
+    playSound(
+        120,
+        .35,
+        "sawtooth"
+    );
 
 }
 
@@ -2441,81 +2008,83 @@ function lose(reason){
    PARAR JOGO
 ========================= */
 
-function stopGame(
-  clear = true
-){
+function stopGame(reset = true){
 
-  running = false;
+    playing = false;
 
+    clearTimeout(moleTimer);
 
-  clearInterval(countTimer);
+    clearInterval(countdownTimer);
 
-  clearTimeout(moleTimer);
+    if(animationFrame){
 
+        cancelAnimationFrame(
+            animationFrame
+        );
 
-  if(clear){
+        animationFrame = null;
 
-    objects.forEach(
-      object => {
-
-        if(
-          object.el &&
-          object.el.parentNode
-        ){
-
-          object.el.remove();
-
-        }
-
-      }
-    );
+    }
 
     objects = [];
 
-  }
+
+    if(reset){
+
+        arena
+            .querySelectorAll(".item")
+            .forEach(
+                item => item.remove()
+            );
+
+    }
 
 }
 
 
 /* =========================
-   VOLTAR AO MENU
+   VOLTAR
 ========================= */
 
 function back(){
 
-  stopGame();
+    stopGame();
 
+    document.getElementById(
+        "game"
+    ).style.display = "none";
 
-  document.getElementById(
-    'game'
-  ).style.display = 'none';
+    document.getElementById(
+        "menu"
+    ).style.display = "block";
 
+    const header =
+        document.querySelector("header");
 
-  document.getElementById(
-    'menu'
-  ).style.display = 'block';
+    if(header){
 
+        header.style.display =
+            "block";
 
-  const header =
-    document.querySelector('header');
+    }
 
+    document.getElementById(
+        "gameover"
+    ).style.display =
+        "none";
 
-  if(header){
-    header.style.display = 'block';
-  }
+    document.getElementById(
+        "countdown"
+    ).style.display =
+        "none";
 
+    score = 0;
 
-  document.getElementById(
-    'gameover'
-  ).style.display = 'none';
+    document.getElementById(
+        "score"
+    ).textContent = "0";
 
-
-  document.getElementById(
-    'countdown'
-  ).style.display = 'none';
-
-
-  renderRanking();
+    loadRanking();
 
 }
 
@@ -2526,82 +2095,110 @@ function back(){
 
 function getRanking(){
 
-  try{
+    try{
 
-    return JSON.parse(
-      localStorage.getItem(
-        'nexusHalloweenRanking'
-      )
-    ) || [];
+        return JSON.parse(
+            localStorage.getItem(
+                "nexusHalloweenRanking"
+            )
+        ) || [];
 
-  }catch(e){
+    }catch(error){
 
-    return [];
+        return [];
 
-  }
+    }
 
 }
 
 
+function saveRanking(ranking){
+
+    try{
+
+        localStorage.setItem(
+            "nexusHalloweenRanking",
+            JSON.stringify(ranking)
+        );
+
+    }catch(error){}
+
+}
+
+
+/* =========================
+   SALVAR PONTUAÇÃO
+========================= */
+
 function saveScore(){
 
-  const input =
-    document.getElementById(
-      'playerName'
+    const input =
+        document.getElementById(
+            "playerName"
+        );
+
+    let name =
+        input.value.trim();
+
+
+    if(!name){
+
+        name = "Anônimo";
+
+    }
+
+
+    name =
+        name.substring(
+            0,
+            18
+        );
+
+
+    const ranking =
+        getRanking();
+
+
+    ranking.push({
+
+        name: name,
+
+        score: score,
+
+        game:
+            gameType === "pump"
+            ? "🎃"
+            : "🦫"
+
+    });
+
+
+    ranking.sort(
+        (a,b) =>
+            b.score - a.score
     );
 
 
-  let name =
-    input.value.trim();
+    ranking.splice(
+        10
+    );
 
 
-  if(!name){
-
-    name = 'Anônimo';
-
-  }
+    saveRanking(
+        ranking
+    );
 
 
-  const ranking =
-    getRanking();
+    input.value = "";
 
 
-  ranking.push({
-
-    name: name,
-    score: score
-
-  });
+    document.getElementById(
+        "gameover"
+    ).style.display =
+        "none";
 
 
-  ranking.sort(
-    (a,b)=>
-      b.score - a.score
-  );
-
-
-  const top =
-    ranking.slice(0,10);
-
-
-  localStorage.setItem(
-    'nexusHalloweenRanking',
-    JSON.stringify(top)
-  );
-
-
-  input.value = '';
-
-
-  document.getElementById(
-    'gameover'
-  ).style.display = 'none';
-
-
-  renderRanking();
-
-
-  back();
+    back();
 
 }
 
@@ -2610,50 +2207,74 @@ function saveScore(){
    MOSTRAR RANKING
 ========================= */
 
-function renderRanking(){
+function loadRanking(){
 
-  const container =
-    document.getElementById('rank');
+    const container =
+        document.getElementById(
+            "rank"
+        );
 
-
-  if(!container) return;
-
-
-  const ranking =
-    getRanking();
+    if(!container) return;
 
 
-  if(ranking.length === 0){
+    const ranking =
+        getRanking();
+
+
+    if(ranking.length === 0){
+
+        container.innerHTML =
+            `
+            <div class="rankrow">
+                <span class="rank-name">
+                    Nenhuma pontuação ainda 👻
+                </span>
+
+                <span class="rank-points">
+                    —
+                </span>
+            </div>
+            `;
+
+        return;
+
+    }
+
 
     container.innerHTML =
-      '<p style="color:#b9aabd">Nenhuma pontuação ainda... 👻</p>';
+        ranking
+        .map(
+            (item,index)=>`
 
-    return;
+            <div class="rankrow">
 
-  }
+                <span class="rank-name">
 
+                    ${
+                        index === 0
+                        ? "👑 "
+                        : (index + 1) + "º "
+                    }
 
-  container.innerHTML =
-    ranking
-      .map(
-        (player,index)=>`
+                    ${escapeHTML(item.name)}
 
-          <div class="rankrow">
+                    <small>
+                        ${item.game || ""}
+                    </small>
 
-            <div class="rank-name">
-              ${index + 1}º
-              👤 ${escapeHTML(player.name)}
+                </span>
+
+                <span class="rank-points">
+
+                    ${item.score} pts
+
+                </span>
+
             </div>
 
-            <div class="rank-points">
-              ${player.score} pts
-            </div>
-
-          </div>
-
-        `
-      )
-      .join('');
+            `
+        )
+        .join("");
 
 }
 
@@ -2664,20 +2285,117 @@ function renderRanking(){
 
 function escapeHTML(text){
 
-  return String(text)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+    return String(text)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
 /* =========================
-   INICIAR RANKING
+   ENTRADA
 ========================= */
 
-renderRanking();
+window.addEventListener(
+    "load",
+    ()=>{
+
+        loadRanking();
+
+        const intro =
+            document.getElementById(
+                "intro"
+            );
+
+        if(intro){
+
+            setTimeout(
+                ()=>{
+
+                    intro.classList.add(
+                        "hide"
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   TECLADO
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Escape" &&
+            document.getElementById(
+                "game"
+            ).style.display === "block"
+        ){
+
+            back();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   PREVENIR ZOOM/SCROLL
+   DURANTE O JOGO
+========================= */
+
+arena.addEventListener(
+    "touchmove",
+    event => {
+
+        if(playing){
+
+            event.preventDefault();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+loadRanking();
 
 </script>
+
+</body>
+</html>
