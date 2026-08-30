@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Halloween na Nexus Community</title>
+
+<style>
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+}
+
+:root{
+ --orange:#ff7417;
+ --orange2:#ffb13b;
+ --purple:#8e45c7;
+ --dark:#08040d;
+}
+
+body{
+ min-height:100vh;
+ overflow-x:hidden;
+ color:#fff;
+ font-family:Arial,sans-serif;
+ text-align:center;
+ background:
+ radial-gradient(circle at 50% 0%,#492052,#180b23 38%,#050308 85%);
+}
+
+/* FUNDO */
+
+.sky{
+ position:fixed;
+ inset:0;
+ overflow:hidden;
+ pointer-events:none;
+ z-index:-5;
+}
+
+.moon{
+ position:absolute;
+ width:90px;
+ height:90px;
+ border-radius:50%;
+ right:10%;
+ top:8%;
+ background:#fff4d0;
+ box-shadow:0 0 25px #fff5,0 0 80px #fff2;
+ animation:moon 5s ease-in-out infinite;
+}
+
+@keyframes moon{
+ 50%{transform:translateY(8px)}
+}
+
+.star{
+ position:absolute;
+ width:3px;
+ height:3px;
+ background:white;
+ border-radius:50%;
+ animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+ from{opacity:.2}
+ to{opacity:1;transform:scale(1.5)}
+}
+
+.bat{
+ position:absolute;
+ font-size:26px;
+ animation:fly 13s linear infinite;
+ opacity:.65;
+}
+
+@keyframes fly{
+ 0%{left:-10%;transform:translateY(0) scale(.8)}
+ 50%{transform:translateY(-70px) scale(1)}
+ 100%{left:110%;transform:translateY(30px) scale(.8)}
+}
+
+.fog{
+ position:absolute;
+ width:180%;
+ height:100px;
+ left:-40%;
+ bottom:8%;
+ border-radius:50%;
+ background:#fff1;
+ filter:blur(30px);
+ animation:fog 12s ease-in-out infinite alternate;
+}
+
+@keyframes fog{
+ from{transform:translateX(-8%)}
+ to{transform:translateX(8%)}
+}
+
+/* =========================
+ TRANSIÇÃO DA BRUXA
+========================= */
+
+.transition{
+ position:fixed;
+ inset:0;
+ z-index:9999;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ background:
+ radial-gradient(circle,#31153e,#08040d 70%);
+}
+
+.transition.show{
+ display:flex;
+}
+
+.transition.witch-fly{
+ animation:darken .7s forwards;
+}
+
+@keyframes darken{
+ from{opacity:0}
+ to{opacity:1}
+}
+
+.witch{
+ position:absolute;
+ left:-180px;
+ font-size:100px;
+ filter:
+ drop-shadow(0 0 12px #b66cff)
+ drop-shadow(0 8px 8px #000);
+ z-index:3;
+}
+
+.witch.fly{
+ animation:
+ witchFly 1.8s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+@keyframes witchFly{
+ 0%{
+  left:-180px;
+  top:65%;
+  transform:rotate(-8deg) scale(.8);
+ }
+ 35%{
+  top:35%;
+  transform:rotate(5deg) scale(1);
+ }
+ 70%{
+  top:52%;
+  transform:rotate(-5deg) scale(1.05);
+ }
+ 100%{
+  left:110%;
+  top:30%;
+  transform:rotate(8deg) scale(.85);
+ }
+}
+
+.transition-text{
+ position:absolute;
+ bottom:17%;
+ width:100%;
+ color:#ff963e;
+ font-size:18px;
+ font-weight:bold;
+ letter-spacing:2px;
+ text-shadow:0 0 15px #ff5b00;
+ animation:pulseText 1s infinite alternate;
+}
+
+@keyframes pulseText{
+ to{opacity:.5}
+}
+
+/* =========================
+ ENTRADA
+========================= */
+
+.intro{
+ position:fixed;
+ inset:0;
+ z-index:9998;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:
+ radial-gradient(circle at center,#32153d,#08040d 70%);
+ transition:opacity .8s,visibility .8s;
+}
+
+.intro.hide{
+ opacity:0;
+ visibility:hidden;
+ pointer-events:none;
+}
+
+.intro-box{
+ padding:30px;
+ animation:introBox 1.2s ease-out;
+}
+
+@keyframes introBox{
+ from{
+  transform:scale(.6);
+  opacity:0;
+ }
+ to{
+  transform:scale(1);
+  opacity:1;
+ }
+}
+
+.intro-pumpkin{
+ font-size:95px;
+ filter:drop-shadow(0 0 25px #ff5b00);
+ animation:introPumpkin 1.8s infinite ease-in-out;
+}
+
+@keyframes introPumpkin{
+ 50%{
+  transform:scale(1.08) rotate(4deg);
+ }
+}
+
+.intro h2{
+ color:#ff8b27;
+ font-size:27px;
+ text-shadow:0 0 15px #ff4500;
+}
+
+.intro p{
+ margin-top:10px;
+ color:#bdaec3;
+}
+
+/* =========================
+ HEADER
+========================= */
+
+header{
+ padding:30px 15px 15px;
+}
+
+.logo{
+ display:inline-block;
+ font-size:70px;
+ filter:drop-shadow(0 0 20px #ff5500);
+ animation:pumpkin 3s ease-in-out infinite;
+}
+
+@keyframes pumpkin{
+ 50%{
+  transform:rotate(4deg) translateY(-9px);
+ }
+}
+
+h1{
+ font-size:clamp(26px,7vw,48px);
+ letter-spacing:2px;
+ color:#ff8b27;
+ text-shadow:0 0 8px #ff5b00,0 0 25px #ff3500;
+}
+
+.subtitle{
+ margin-top:8px;
+ color:#cdbbd4;
+}
+
+/* =========================
+ MENU
+========================= */
+
+#menu{
+ width:94%;
+ max-width:1050px;
+ margin:auto;
+ padding-bottom:50px;
+}
+
+.section-title{
+ margin:28px 0 18px;
+ font-size:22px;
+}
+
+.section-title span{
+ color:var(--orange);
+}
+
+.games{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+ gap:22px;
+}
+
+.card{
+ position:relative;
+ overflow:hidden;
+ padding:28px 20px;
+ min-height:390px;
+ border-radius:26px;
+
+ background:
+ linear-gradient(145deg,#26132fdd,#0c0711ee);
+
+ border:1px solid #8d4da555;
+
+ box-shadow:
+ 0 20px 45px #000b,
+ inset 0 1px #ffffff14;
+
+ transition:.3s;
+}
+
+.card:hover{
+ transform:translateY(-8px);
+ border-color:#ff7417aa;
+ box-shadow:0 25px 55px #000d,0 0 35px #ff650020;
+}
+
+.card-icon{
+ font-size:82px;
+ margin:10px 0 18px;
+ filter:drop-shadow(0 8px 8px #000);
+ animation:floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon{
+ 50%{transform:translateY(-7px) rotate(2deg)}
+}
+
+.card h2{
+ color:#ff963e;
+ font-size:25px;
+ margin-bottom:12px;
+}
+
+.card p{
+ color:#b9aabd;
+ line-height:1.6;
+ min-height:70px;
+}
+
+.play{
+ position:relative;
+ overflow:hidden;
+ width:90%;
+ margin-top:12px;
+ padding:16px;
+
+ border:1px solid #ffb35a55;
+ border-radius:14px;
+
+ color:#fff;
+ font-size:17px;
+ font-weight:bold;
+
+ background:linear-gradient(135deg,#ff8b20,#d43800);
+
+ box-shadow:0 8px 20px #ff4c0028,inset 0 1px #fff4;
+
+ cursor:pointer;
+}
+
+.play:after{
+ content:"";
+ position:absolute;
+ width:70px;
+ height:150%;
+ top:-25%;
+ left:-100px;
+ transform:rotate(20deg);
+ background:#fff3;
+ transition:.5s;
+}
+
+.play:hover:after{
+ left:120%;
+}
+
+.help{
+ margin-top:16px;
+ padding:14px;
+ border-radius:14px;
+ background:#05030888;
+ border:1px solid #ffffff0b;
+ color:#c7b8cc;
+ font-size:13px;
+ line-height:1.7;
+}
+
+/* =========================
+ RANKING
+========================= */
+
+#ranking{
+ margin-top:30px;
+ padding:25px 15px;
+ border-radius:25px;
+
+ background:linear-gradient(145deg,#191021ee,#09050cee);
+
+ border:1px solid #8b4ea455;
+
+ box-shadow:0 20px 50px #000b;
+}
+
+#ranking h2{
+ color:#ff9a43;
+ margin-bottom:18px;
+}
+
+.rankrow{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+
+ max-width:600px;
+ margin:5px auto;
+ padding:12px 15px;
+
+ border-radius:12px;
+ background:#ffffff05;
+ border-bottom:1px solid #ffffff0b;
+}
+
+.rankrow:nth-child(1){
+ background:linear-gradient(90deg,#ff9d2418,#ffffff05);
+ border:1px solid #ffae3030;
+}
+
+.rank-name{
+ text-align:left;
+}
+
+.rank-points{
+ color:#ffad52;
+ font-weight:bold;
+}
+
+/* =========================
+ JOGO
+========================= */
+
+#game{
+ display:none;
+ width:100%;
+ padding:10px 5px 35px;
+}
+
+#title{
+ margin:8px 0;
+ font-size:27px;
+ color:#ff963e;
+ text-shadow:0 0 15px #ff5b00;
+}
+
+.info{
+ display:inline-block;
+ margin:8px auto 15px;
+ padding:9px 20px;
+ border-radius:20px;
+ background:#110918cc;
+ border:1px solid #ff741744;
+ font-size:21px;
+ font-weight:bold;
+}
+
+#score{
+ color:#ffad52;
+}
+
+.arena{
+ position:relative;
+ width:96%;
+ max-width:650px;
+ height:510px;
+ margin:auto;
+ overflow:hidden;
+
+ border-radius:25px;
+ border:2px solid #ff7417;
+
+ box-shadow:
+ 0 0 30px #ff550022,
+ 0 20px 50px #000b;
+
+ touch-action:none;
+}
+
+.pumpkin-bg{
+ background:
+ radial-gradient(circle at 75% 13%,#fff8df 0 38px,transparent 41px),
+ radial-gradient(circle at 20% 70%,#45204f 0,transparent 30%),
+ linear-gradient(160deg,#281332,#0b0710 65%,#170a15);
+}
+
+.mole-bg{
+ background:
+ radial-gradient(circle at 75% 12%,#fff8df 0 36px,transparent 39px),
+ linear-gradient(#10091b 0%,#24142e 40%,#382519 41%,#21140d 70%,#0b0705 100%);
+}
+
+.mole-bg:after{
+ content:"🌿     🌿       🌿     🌿";
+ position:absolute;
+ bottom:25px;
+ left:0;
+ width:100%;
+ font-size:32px;
+ opacity:.45;
+ pointer-events:none;
+}
+
+.mist{
+ position:absolute;
+ width:180%;
+ height:100px;
+ left:-40%;
+ bottom:55px;
+ background:#fff1;
+ filter:blur(25px);
+ animation:fog 9s ease-in-out infinite alternate;
+ pointer-events:none;
+}
+
+.tree{
+ position:absolute;
+ bottom:20px;
+ font-size:110px;
+ opacity:.12;
+ pointer-events:none;
+}
+
+.t1{left:-20px}
+.t2{right:-20px}
+
+.ground{
+ position:absolute;
+ bottom:0;
+ left:0;
+ width:100%;
+ height:15px;
+ background:#ff6500;
+ box-shadow:0 0 20px #ff6500;
+ z-index:2;
+}
+
+/* OBJETOS */
+
+.item{
+ position:absolute;
+ font-size:72px;
+
+ transform:translate(-50%,-50%);
+
+ user-select:none;
+ touch-action:none;
+
+ z-index:10;
+
+ filter:drop-shadow(0 8px 6px #000);
+
+ cursor:pointer;
+
+ animation:spawnItem .18s ease-out;
+}
+
+@keyframes spawnItem{
+ from{
+  transform:translate(-50%,-50%) scale(.3);
+  opacity:0;
+ }
+ to{
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;
+ }
+}
+
+/* BURACOS */
+
+.hole{
+ position:absolute;
+
+ width:78px;
+ height:43px;
+
+ border-radius:50%;
+
+ background:radial-gradient(ellipse at center,#020101 0 50%,#160d08 70%,transparent 72%);
+
+ border:3px solid #4d3020;
+
+ box-shadow:inset 0 5px 10px #000,0 4px 5px #0008;
+
+ transform:translate(-50%,-50%);
+
+ z-index:3;
+}
+
+/* CONTAGEM */
+
+#countdown{
+ position:absolute;
+ inset:0;
+
+ z-index:40;
+
+ display:none;
+ align-items:center;
+ justify-content:center;
+
+ background:#050208bb;
+
+ font-size:100px;
+ font-weight:bold;
+
+ color:#ff8a22;
+
+ text-shadow:0 0 15px #ff5b00,0 0 50px #ff3c00;
+
+ animation:countPulse .7s;
+}
+
+@keyframes countPulse{
+ 0%{transform:scale(1.5);opacity:0}
+ 100%{transform:scale(1);opacity:1}
+}
+
+/* ACERTO */
+
+.hit{
+ position:absolute;
+ pointer-events:none;
+
+ font-size:40px;
+ font-weight:bold;
+
+ color:#ffb23e;
+
+ text-shadow:0 0 10px #ff5b00;
+
+ animation:hit .5s forwards;
+
+ z-index:35;
+}
+
+@keyframes hit{
+ 0%{
+  transform:scale(.4);
+  opacity:1;
+ }
+ 100%{
+  transform:scale(1.8) translateY(-45px);
+  opacity:0;
+ }
+}
+
+/* GAME OVER */
+
+.gameover{
+ display:none;
+
+ position:absolute;
+ inset:0;
+
+ z-index:50;
+
+ align-items:center;
+ justify-content:center;
+
+ padding:18px;
+
+ background:#050208dd;
+
+ backdrop-filter:blur(6px);
+}
+
+.gameover-box{
+ width:92%;
+ max-width:370px;
+
+ padding:28px 18px;
+
+ border-radius:24px;
+
+ background:linear-gradient(145deg,#2b1433,#0d0710);
+
+ border:1px solid #ff7417aa;
+
+ box-shadow:
+ 0 20px 60px #000,
+ 0 0 35px #ff5b0020;
+
+ animation:gameover .35s ease-out;
+}
+
+@keyframes gameover{
+ from{
+  transform:scale(.8) translateY(20px);
+  opacity:0;
+ }
+ to{
+  transform:scale(1);
+  opacity:1;
+ }
+}
+
+.gameover-box h2{
+ color:#ff7d20;
+ text-shadow:0 0 15px #ff4d00;
+}
+
+.final{
+ font-size:38px;
+ color:#ffb052;
+ margin:8px;
+}
+
+.gameover-box input{
+ width:90%;
+ padding:14px;
+
+ border:1px solid #ffffff18;
+ border-radius:12px;
+
+ background:#050308;
+ color:white;
+
+ outline:none;
+
+ font-size:16px;
+ text-align:center;
+}
+
+.gameover-box input:focus{
+ border-color:#ff7417;
+ box-shadow:0 0 15px #ff5b0030;
+}
+
+.save{
+ width:90%;
+}
+
+.back{
+ background:#241b29;
+ border:1px solid #ffffff15;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+ header{
+  padding-top:20px;
+ }
+
+ .logo{
+  font-size:58px;
+ }
+
+ .games{
+  grid-template-columns:1fr;
+ }
+
+ .card{
+  min-height:auto;
+ }
+
+ .arena{
+  height:480px;
+ }
+
+ .item{
+  font-size:68px;
+ }
+
+ .hole{
+  width:65px;
+  height:37px;
+ }
+
+ .witch{
+  font-size:80px;
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================
+ TELA DE ENTRADA
+========================= -->
+
+<div class="intro" id="intro">
+
+ <div class="intro-box">
+
+  <div class="intro-pumpkin">
+   🎃
+  </div>
+
+  <h2>
+   HALLOWEEN NA NEXUS
+  </h2>
+
+  <p>
+   Prepare-se para entrar...
+  </p>
+
+ </div>
+
+</div>
+
+
+<!-- =========================
+ TRANSIÇÃO
+========================= -->
+
+<div class="transition" id="transition">
+
+ <div class="witch" id="witch">
+  🧙‍♀️
+ </div>
+
+ <div class="transition-text">
+  🧙‍♀️ PREPARE-SE...
+ </div>
+
+</div>
+
+
+<!-- FUNDO -->
+
+<div class="sky">
+
+ <div class="moon"></div>
+
+ <div class="fog"></div>
+
+ <div class="bat" style="top:18%;animation-delay:0s">
+  🦇
+ </div>
+
+ <div class="bat" style="top:32%;animation-delay:5s">
+  🦇
+ </div>
+
+ <div class="bat" style="top:12%;animation-delay:8s">
+  🦇
+ </div>
+
+ <div class="star" style="left:10%;top:15%"></div>
+ <div class="star" style="left:20%;top:25%"></div>
+ <div class="star" style="left:35%;top:10%"></div>
+ <div class="star" style="left:45%;top:30%"></div>
+ <div class="star" style="left:60%;top:18%"></div>
+ <div class="star" style="left:82%;top:25%"></div>
+ <div class="star" style="left:90%;top:42%"></div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+ <div class="logo">
+  🎃
+ </div>
+
+ <h1>
+  HALLOWEEN NA NEXUS COMMUNITY
+ </h1>
+
+ <div class="subtitle">
+  👻 Portal de jogos • 🏆 Ranking • 🎃 Halloween
+ </div>
+
+</header>
+
+
+<!-- MENU -->
+
+<div id="menu">
+
+ <div class="section-title">
+  🎮 <span>ESCOLHA SEU JOGO</span>
+ </div>
+
+
+ <div class="games">
+
+
+  <!-- PEGA ABÓBORAS -->
+
+  <div class="card">
+
+   <div class="card-icon">
+    🎃
+   </div>
+
+   <h2>
+    PEGA ABÓBORAS
+   </h2>
+
+   <p>
+    As abóboras estão caindo!
+    Pegue o máximo que conseguir
+    antes que uma toque o chão.
+   </p>
+
+   <button
+    class="play"
+    onclick="openGame('pump')"
+   >
+    ▶ COMEÇAR JOGO
+   </button>
+
+   <div class="help">
+
+    🎃 +1 ponto<br>
+    💣 Bomba no chão não importa<br>
+    💥 Clique na bomba = Game Over<br>
+    ⚠️ Abóbora no chão = Game Over
+
+   </div>
+
+  </div>
+
+
+  <!-- CASTOR -->
+
+  <div class="card">
+
+   <div class="card-icon">
+    🔨
+   </div>
+
+   <h2>
+    BATER NO CASTOR
+   </h2>
+
+   <p>
+    Os castores estão escondidos
+    nos buracos. Seja rápido e
+    acerte-os antes que desapareçam!
+   </p>
+
+   <button
+    class="play"
+    onclick="openGame('mole')"
+   >
+    ▶ COMEÇAR JOGO
+   </button>
+
+   <div class="help">
+
+    🦫 +1 ponto<br>
+    💣 Clique na bomba = Game Over<br>
+    🕳️ 7 buracos diferentes<br>
+    ⚡ A velocidade aumenta
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- RANKING -->
+
+ <div id="ranking">
+
+  <h2>
+   🏆 RANKING DOS PESADELOS
+  </h2>
+
+  <div id="rank"></div>
+
+ </div>
+
+</div>
+
+
+<!-- =========================
+ JOGO
+========================= -->
+
+<div id="game">
+
+ <h2 id="title"></h2>
+
+ <div class="info">
+  🏆 <span id="score">0</span>
+ </div>
+
+
+ <div
+  class="arena"
+  id="arena"
+ >
+
+  <div id="countdown"></div>
+
+  <div class="mist"></div>
+
+  <div class="tree t1">
+   🌲
+  </div>
+
+  <div class="tree t2">
+   🌲
+  </div>
+
+
+  <!-- 7 BURACOS -->
+
+  <div class="hole" id="h1"></div>
+  <div class="hole" id="h2"></div>
+  <div class="hole" id="h3"></div>
+  <div class="hole" id="h4"></div>
+  <div class="hole" id="h5"></div>
+  <div class="hole" id="h6"></div>
+  <div class="hole" id="h7"></div>
+
+
+  <div class="ground"></div>
+
+
+  <!-- GAME OVER -->
+
+  <div
+   class="gameover"
+   id="gameover"
+  >
+
+   <div class="gameover-box">
+
+    <h2>
+     💀 GAME OVER
+    </h2>
+
+    <p>
+     Sua pontuação
+    </p>
+
+    <div
+     class="final"
+     id="finalScore"
+    >
+     0
+    </div>
+
+    <p>
+     Digite seu nome para entrar
+     no ranking:
+    </p>
+
+    <input
+     id="playerName"
+     maxlength="18"
+     placeholder="Seu nome"
+     autocomplete="off"
+    >
+
+    <br>
+
+    <button
+     class="save"
+     onclick="saveScore()"
+    >
+     🏆 SALVAR PONTUAÇÃO
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <div
+  class="message"
+  id="message"
+ >
+  Prepare-se...
+ </div>
+
+
+ <button
+  class="back"
+  onclick="back()"
+ >
+  ⬅ VOLTAR AO MENU
+ </button>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+ VARIÁVEIS
+========================= */
+
+let type='';
+let score=0;
+let running=false;
+
+let objects=[];
+
+let lastTime=0;
+let lastSpawn=0;
+
+let startTime=0;
+
+let spawnDelay=900;
+
+const arena=
+document.getElementById('arena');
+
+let audio=null;
+
+
+/* =========================
+ SOM
+========================= */
+
+function getAudio(){
+
+ if(!audio){
+
+  audio=
+  new AudioContext();
+
+ }
+
+ return audio;
+
+}
+
+
+function sound(
+ freq,
+ duration=.1,
+ wave='sine'
+){
+
+ try{
+
+  let a=getAudio();
+
+  let osc=
+  a.createOscillator();
+
+  let gain=
+  a.createGain();
+
+  osc.type=wave;
+
+  osc.frequency.value=freq;
+
+  gain.gain.setValueAtTime(
+   .08,
+   a.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+   .001,
+   a.currentTime+duration
+  );
+
+  osc.connect(gain);
+
+  gain.connect(a.destination);
+
+  osc.start();
+
+  osc.stop(
+   a.currentTime+duration
+  );
+
+ }catch(e){}
+
+}
+
+
+/* =========================
+ RISADA DE BRUXA
+ ========================= */
+
+function witchLaugh(){
+
+ try{
+
+  let a=getAudio();
+
+  let now=a.currentTime;
+
+  /*
+  Cria uma risada estilizada
+  usando vários tons rápidos.
+  */
+
+  [260,190,280,170,240,130].forEach(
+   (freq,i)=>{
+
+    let osc=
+    a.createOscillator();
+
+    let gain=
+    a.createGain();
+
+    osc.type='sawtooth';
+
+    osc.frequency.setValueAtTime(
+     freq,
+     now+i*.11
+    );
+
+    gain.gain.setValueAtTime(
+     .001,
+     now+i*.11
+    );
+
+    gain.gain.linearRampToValueAtTime(
+     .07,
+     now+i*.11+.04
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+     .001,
+     now+i*.11+.11
+    );
+
+    osc.connect(gain);
+
+    gain.connect(a.destination);
+
+    osc.start(
+     now+i*.11
+    );
+
+    osc.stop(
+     now+i*.11+.12
+    );
+
+   }
+  );
+
+ }catch(e){}
+
+}
+
+
+/* =========================
+ TRANSIÇÃO
+========================= */
+
+function transition(callback){
+
+ let screen=
+ document.getElementById(
+  'transition'
+ );
+
+ let witch=
+ document.getElementById(
+  'witch'
+ );
+
+
+ screen.classList.add('show');
+
+ witch.classList.remove('fly');
+
+ void witch.offsetWidth;
+
+ witch.classList.add('fly');
+
+
+ witchLaugh();
+
+
+ setTimeout(()=>{
+
+  callback();
+
+ },900);
+
+
+ setTimeout(()=>{
+
+  screen.classList.remove('show');
+  witch.classList.remove('fly');
+
+ },1900);
+
+}
+
+
+/* =========================
+ ABRIR JOGO
+========================= */
+
+function openGame(t){
+
+ transition(()=>{
+
+  type=t;
+
+  document.getElementById('menu')
+  .style.display='none';
+
+  document.getElementById('game')
+  .style.display='block';
+
+
+  document.getElementById('title')
+  .textContent=
+  t==='pump'
+  ?
+  '🎃 PEGA ABÓBORAS'
+  :
+  '🔨 BATER NO CASTOR';
+
+
+  arena.className=
+  'arena '+
+  (
+   t==='pump'
+   ?
+   'pumpkin-bg'
+   :
+   'mole-bg'
+  );
+
+
+  document.getElementById('gameover')
+  .style.display='none';
+
+
+  score=0;
+
+  document.getElementById('score')
+  .textContent='0';
+
+
+  if(type==='mole')
+  setupHoles();
+
+
+  countdown();
+
+ });
+
+}
+
+
+/* =========================
+ BURACOS
+========================= */
+
+function setupHoles(){
+
+ let positions=[
+  [15,25],
+  [50,20],
+  [85,27],
+  [25,48],
+  [70,48],
+  [15,75],
+  [50,78]
+ ];
+
+
+ positions.forEach((p,i)=>{
+
+  let h=
+  document.getElementById(
+   'h'+(i+1)
+  );
+
+  h.style.left=
+  p[0]+'%';
+
+  h.style.top=
+  p[1]+'%';
+
+ });
+
+}
+
+
+/* =========================
+ CONTAGEM
+========================= */
+
+function countdown(){
+
+ const box=
+ document.getElementById(
+  'countdown'
+ );
+
+
+ box.style.display='flex';
+
+
+ let nums=[
+  '3',
+  '2',
+  '1',
+  'GO!'
+ ];
+
+
+ let i=0;
+
+ box.textContent='3';
+
+ sound(400,.12);
+
+
+ let timer=
+ setInterval(()=>{
+
+  i++;
+
+
+  if(i>=nums.length){
+
+   clearInterval(timer);
+
+   box.style.display='none';
+
+   sound(
+    900,
+    .2,
+    'square'
+   );
+
+   startGame();
+
+   return;
+
+  }
+
+
+  box.textContent=
+  nums[i];
+
+
+  sound(
+   i===3
+   ?900
+   :400,
+   .12
+  );
+
+
+ },700);
+
+}
+
+
+/* =========================
+ COMEÇAR
+========================= */
+
+function startGame(){
+
+ running=true;
+
+ objects=[];
+
+ score=0;
+
+ startTime=
+ performance.now();
+
+ lastTime=
+ performance.now();
+
+ lastSpawn=0;
+
+ spawnDelay=900;
+
+
+ arena
+ .querySelectorAll('.item')
+ .forEach(
+  x=>x.remove()
+ );
+
+
+ requestAnimationFrame(loop);
+
+}
+
+
+/* =========================
+ LOOP
+========================= */
+
+function loop(time){
+
+ if(!running)
+ return;
+
+
+ let dt=
+ Math.min(
+  (time-lastTime)/1000,
+  .05
+ );
+
+
+ lastTime=time;
+
+
+ let elapsed=
+ (time-startTime)/1000;
+
+
+ spawnDelay=
+ Math.max(
+ 280,
+ 900-elapsed*22
+ );
+
+
+ if(
+  time-lastSpawn>
+  spawnDelay
+ ){
+
+  spawn();
+
+  lastSpawn=time;
+
+ }
+
+
+ objects.forEach(o=>{
+
+  if(!o.el.parentNode)
+  return;
+
+
+  if(type==='pump'){
+
+   o.y+=
+   o.speed*dt;
+
+   o.el.style.top=
+   o.y+'px';
+
+
+   if(
+    o.y>=
+    arena.clientHeight-35
+   ){
+
+    if(!o.bomb){
+
+     lose();
+
+    }else{
+
+     remove(o);
+
+    }
+  
